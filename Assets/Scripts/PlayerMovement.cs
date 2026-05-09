@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         if (charController.isGrounded)
         {
             // A slight push down keeps the character firmly on the ground
-            verticalVelocity = gravity * Time.deltaTime;
+            verticalVelocity = gravity;
 
             // Check if the player pressed the Spacebar
             if (Input.GetButtonDown("Jump"))
