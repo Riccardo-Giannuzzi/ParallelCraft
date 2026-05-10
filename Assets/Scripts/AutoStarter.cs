@@ -6,6 +6,7 @@ public class AutoStarter : MonoBehaviour
     public TransporterBlock blocco1;
     public TransporterBlock blocco2;
     public TransporterBlock blocco3;
+    public TransporterBlock blocco4;
 
     [Header("La sfera nella scena")]
     public GameObject sferaDaTrasportare;
@@ -15,6 +16,7 @@ public class AutoStarter : MonoBehaviour
         // 1. Saldiamo i blocchi tra loro (così si passano gli input in automatico)
         if (blocco1 != null && blocco2 != null) blocco1.ConnectTo(blocco2);
         if (blocco2 != null && blocco3 != null) blocco2.ConnectTo(blocco3);
+        if (blocco3 != null && blocco4 != null) blocco3.ConnectTo(blocco4);
 
         // 2. Prendiamo la sfera e la buttiamo sul primo blocco
         if (blocco1 != null && sferaDaTrasportare != null && blocco1.CanReceiveItem())
