@@ -9,6 +9,18 @@ public abstract class IOBlock : BlockBase
     
     public IOBlock nextBlock; 
 
+
+    protected virtual void Start()
+    {
+        if (nextBlock != null)
+        {
+            if (!nextBlock.inputs.Contains(this.output))
+            {
+                nextBlock.inputs.Add(this.output);
+            }
+        }
+    }
+
     // QUESTA è la funzione magica che userà il tuo amico
     public void ConnectTo(IOBlock targetBlock)
     {

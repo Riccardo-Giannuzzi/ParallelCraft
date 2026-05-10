@@ -12,10 +12,20 @@ public class TransporterBlock : IOBlock
     private Vector3 endPos;
     private float progress = 0f;
 
+    [Header("Test Rapido")]
+    public GameObject itemPartenza; // <-- AGGIUNTO: Lo slot per mettere la sfera iniziale
+
     protected override void Start()
     {
-        base.Start();
+        base.Start(); // Questo richiama l'auto-saldatura che abbiamo messo in IOBlock
         blockID = "belt_basic"; 
+
+        // <-- AGGIUNTO: Se hai assegnato un oggetto iniziale, lo fa partire subito!
+        if (itemPartenza != null)
+        {
+            Transform puntoDiPartenza = inputs.Count > 0 ? inputs[0] : transform;
+            ReceiveItem(itemPartenza, puntoDiPartenza);
+        }
     }
 
     public override bool CanReceiveItem()
@@ -29,7 +39,10 @@ public class TransporterBlock : IOBlock
         
         startPos = entryPoint.position;
         endPos = output.position;
-        centerPos = (startPos + endPos) / 2f;
+        
+        centerPos = transform.position;
+        
+        centerPos.y = startPos.y; 
         
         progress = 0f;
     }
@@ -58,8 +71,8 @@ public class TransporterBlock : IOBlock
                 
                 if (nextBlock != null && nextBlock.CanReceiveItem())
                 {
-                    Transform nextInput = nextBlock.inputs.Count > 0 ? nextBlock.inputs[0] : nextBlock.transform;
-                    nextBlock.ReceiveItem(currentItem, nextInput); 
+                    // Passiamo DIRETTAMENTE il nostro output come punto di ingresso per il prossimo blocco!
+                    nextBlock.ReceiveItem(currentItem, this.output); 
                     currentItem = null; 
                 }
             }
