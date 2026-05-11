@@ -1,11 +1,21 @@
 using UnityEngine;
 
+public enum ItemType
+{
+    Tool,
+    Placeable
+}
+
 [System.Serializable]
 public class ItemData
 {
     public string itemName;
 
-    public GameObject worldObject;
+    public ItemType itemType;
+
+    public GameObject handObject;
+
+    public GameObject placeablePrefab;
 
     public Sprite icon;
 }

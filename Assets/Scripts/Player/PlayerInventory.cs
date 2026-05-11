@@ -75,9 +75,9 @@ public class PlayerInventory : MonoBehaviour
     {
         foreach (ItemData item in slots)
         {
-            if (item != null && item.worldObject != null)
+            if (item != null && item.handObject != null)
             {
-                item.worldObject.SetActive(false);
+                item.handObject.SetActive(false);
             }
         }
     }
@@ -93,9 +93,9 @@ public class PlayerInventory : MonoBehaviour
 
         ItemData selectedItem = slots[slotIndex];
 
-        if (selectedItem != null && selectedItem.worldObject != null)
+        if (selectedItem != null && selectedItem.handObject != null)
         {
-            selectedItem.worldObject.SetActive(true);
+            selectedItem.handObject.SetActive(true);
         }
     }
 

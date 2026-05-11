@@ -1011,9 +1011,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneCamera: {fileID: 925219338}
-  placementLayermask:
+  placementLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
+  breakableLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!4 &350680488
 Transform:
   m_ObjectHideFlags: 0
@@ -1362,7 +1365,7 @@ GameObject:
   - component: {fileID: 434532586}
   - component: {fileID: 434532585}
   - component: {fileID: 434532584}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: GroundPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1790,37 +1793,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807168053}
   m_CullTransparentMesh: 1
---- !u!1 &809746194
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 809746195}
-  m_Layer: 0
-  m_Name: Saw
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &809746195
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 809746194}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5237713, y: 3.098256, z: -0.8685851}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &841630964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,6 +2282,7 @@ MonoBehaviour:
   cellIndicator: {fileID: 2144867320}
   inputManager: {fileID: 350680487}
   grid: {fileID: 971430676}
+  inventory: {fileID: 1308013250}
 --- !u!1001 &1163564770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2376,7 +2349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: af79005c4e035874a84aaa80dd7c68c4, type: 3}
       propertyPath: m_Name
-      value: Minecraft Pickaxe
+      value: Pickaxe
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: af79005c4e035874a84aaa80dd7c68c4, type: 3}
       propertyPath: m_IsActive
@@ -2705,31 +2678,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slots:
   - itemName: Pickaxe
-    worldObject: {fileID: 1281861165}
+    itemType: 0
+    handObject: {fileID: 1281861165}
+    placeablePrefab: {fileID: 0}
     icon: {fileID: 21300000, guid: 3e0ef4d1a530f7a40a905635b12d7f6f, type: 3}
   - itemName: Saw
-    worldObject: {fileID: 1773644161}
+    itemType: 1
+    handObject: {fileID: 1773644161}
+    placeablePrefab: {fileID: 7741392646853959959, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
     icon: {fileID: 21300000, guid: 2653ca9214e55614cbd0f329e2a77bfc, type: 3}
   - itemName: 
-    worldObject: {fileID: 0}
+    itemType: 0
+    handObject: {fileID: 0}
+    placeablePrefab: {fileID: 0}
     icon: {fileID: 0}
   - itemName: 
-    worldObject: {fileID: 0}
+    itemType: 0
+    handObject: {fileID: 0}
+    placeablePrefab: {fileID: 0}
     icon: {fileID: 0}
   - itemName: 
-    worldObject: {fileID: 0}
+    itemType: 0
+    handObject: {fileID: 0}
+    placeablePrefab: {fileID: 0}
     icon: {fileID: 0}
   - itemName: 
-    worldObject: {fileID: 0}
+    itemType: 0
+    handObject: {fileID: 0}
+    placeablePrefab: {fileID: 0}
     icon: {fileID: 0}
   - itemName: 
-    worldObject: {fileID: 0}
+    itemType: 0
+    handObject: {fileID: 0}
+    placeablePrefab: {fileID: 0}
     icon: {fileID: 0}
   - itemName: 
-    worldObject: {fileID: 0}
+    itemType: 0
+    handObject: {fileID: 0}
+    placeablePrefab: {fileID: 0}
     icon: {fileID: 0}
   - itemName: 
-    worldObject: {fileID: 0}
+    itemType: 0
+    handObject: {fileID: 0}
+    placeablePrefab: {fileID: 0}
     icon: {fileID: 0}
 --- !u!1 &1358633663
 GameObject:
@@ -3407,8 +3398,8 @@ GameObject:
   - component: {fileID: 1833474204}
   - component: {fileID: 1833474203}
   - component: {fileID: 1833474202}
-  m_Layer: 0
-  m_Name: PlaceblePlane
+  m_Layer: 6
+  m_Name: PlaceablePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4109,70 +4100,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1737096497}
   selectionBorder: {fileID: 372480690}
---- !u!1001 &4498810875213394508
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7741392646853959959, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
-      propertyPath: m_Name
-      value: Cube
-      objectReference: {fileID: 0}
-    - target: {fileID: 8597223963901191506, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8597223963901191506, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.309
-      objectReference: {fileID: 0}
-    - target: {fileID: 8597223963901191506, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -6.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 8597223963901191506, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8597223963901191506, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8597223963901191506, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8597223963901191506, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8597223963901191506, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8597223963901191506, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8597223963901191506, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8166436725598890197, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: def9ba07c2576a844a2e4a9c4eb31595, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 4498810875213394508}
-  - {fileID: 809746195}
   - {fileID: 434532587}
   - {fileID: 445390263}
   - {fileID: 2064783788}

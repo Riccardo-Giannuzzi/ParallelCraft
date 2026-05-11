@@ -10,7 +10,9 @@ public class InputManager : MonoBehaviour
     private Vector3 lastPosition;
 
     [SerializeField]
-    private LayerMask placementLayermask;
+    private LayerMask placementLayerMask;
+    [SerializeField]
+    private LayerMask breakableLayerMask;
 
     public event Action OnClicked;
 
@@ -29,11 +31,28 @@ public class InputManager : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100f, placementLayermask))
+        if (Physics.Raycast(ray, out hit, 100f, placementLayerMask))
         {
             lastPosition = hit.point;
         }
 
         return lastPosition;
+    }
+
+    public PlaceableObject GetTargetedPlaceable()
+    {
+        Ray ray = new Ray(
+            sceneCamera.transform.position,
+            sceneCamera.transform.forward
+        );
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f, breakableLayerMask))
+        {
+            return hit.collider.GetComponent<PlaceableObject>();
+        }
+
+        return null;
     }
 }
