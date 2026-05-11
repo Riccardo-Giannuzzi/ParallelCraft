@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
             OnClicked?.Invoke();
     }
 
-    public Vector3 GetSelectedMapPosition()
+    public bool TryGetSelectedMapPosition(out Vector3 position)
     {
         Ray ray = new Ray(
             sceneCamera.transform.position,
@@ -33,10 +33,12 @@ public class InputManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, placementLayerMask))
         {
-            lastPosition = hit.point;
+            position = hit.point;
+            return true;
         }
 
-        return lastPosition;
+        position = Vector3.zero;
+        return false;
     }
 
     public PlaceableObject GetTargetedPlaceable()

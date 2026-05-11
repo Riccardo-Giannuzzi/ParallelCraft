@@ -21,10 +21,22 @@ public class PlacementSystem : MonoBehaviour
 
     private void Update()
     {
-        Vector3 position = inputManager.GetSelectedMapPosition();
-        Vector3Int gridPosition = grid.WorldToCell(position);
-        indicator.transform.position = position;
-        cellIndicator.transform.position = grid.CellToWorld(gridPosition);
+        if (inputManager.TryGetSelectedMapPosition(out Vector3 position))
+        {
+            Vector3Int gridPosition = grid.WorldToCell(position);
+
+            indicator.SetActive(true);
+            cellIndicator.SetActive(true);
+
+            indicator.transform.position = position;
+            cellIndicator.transform.position =
+                grid.CellToWorld(gridPosition);
+        }
+        else
+        {
+            indicator.SetActive(false);
+            cellIndicator.SetActive(false);
+        }
     }
 
     private void PlaceStructure()
@@ -48,7 +60,10 @@ public class PlacementSystem : MonoBehaviour
 
     private void PlaceBlock(ItemData item)
     {
-        Vector3 position = inputManager.GetSelectedMapPosition();
+        if (!inputManager.TryGetSelectedMapPosition(out Vector3 position))
+        {
+            return;
+        }
 
         Vector3Int gridPosition = grid.WorldToCell(position);
 
