@@ -87,11 +87,6 @@ public class PlayerInventory : MonoBehaviour
         if (slotIndex < 0 || slotIndex >= slots.Length)
             return;
 
-
-        //AGGIUNTO PER TESTARE SCORRIMENTO e SELEZIONE CORRETTA SLOT
-        SelectedSlot = slotIndex;
-        Debug.Log("Slot selected: " + SelectedSlot); 
-
         DeactivateAllSlots();
 
         SelectedSlot = slotIndex;
