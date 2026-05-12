@@ -39,6 +39,46 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
+    
+    private void UpdateGridConnections(Vector3Int pos, IOBlock nuovoIO)
+{
+    // Il blocco piazzato imposta il SUO prossimo
+    Vector3Int forwardDir = Vector3Int.RoundToInt(nuovoIO.transform.forward);
+    Vector3Int nextPos = pos + forwardDir;
+
+    if (placedObjects.TryGetValue(nextPos, out GameObject targetObj))
+    {
+        IOBlock targetIO = targetObj.GetComponent<IOBlock>();
+        if (targetIO != null) 
+        {
+            nuovoIO.ConnectTo(targetIO);
+        }
+    }
+
+    // Controlliamo le 4 direzioni attorno a noi. 
+    // Solo il vicino che "punta" verso di noi deve aggiornarsi.
+    Vector3Int[] directions = { Vector3Int.forward, Vector3Int.back, Vector3Int.left, Vector3Int.right };
+    
+    foreach (var dir in directions)
+    {
+        Vector3Int neighborPos = pos + dir;
+        if (placedObjects.TryGetValue(neighborPos, out GameObject neighborObj))
+        {
+            IOBlock neighborIO = neighborObj.GetComponent<IOBlock>();
+            if (neighborIO != null)
+            {
+                Vector3Int neighborForward = Vector3Int.RoundToInt(neighborIO.transform.forward);
+                
+                if (neighborPos + neighborForward == pos)
+                {
+                    neighborIO.ConnectTo(nuovoIO);
+                }
+            }
+        }
+    }
+}
+
+
     private void PlaceStructure()
     {
         ItemData currentItem = inventory.GetCurrentItem();
@@ -74,17 +114,50 @@ public class PlacementSystem : MonoBehaviour
 
         Vector3 worldPosition = grid.CellToWorld(gridPosition) + grid.cellSize / 2;
 
+
+        /* Per ora tolto
+        Quaternion currentRotation = indicator.transform.rotation;
+        
         GameObject placedObject = Instantiate(
-            item.placeablePrefab,
-            worldPosition,
-            Quaternion.identity
-        );
+            item.placeablePrefab, 
+            worldPosition, 
+            currentRotation
+        );*/
+
+        // --- NUOVA LOGICA DI ROTAZIONE ---
+        // Prendiamo la direzione in cui guarda la camera
+        Vector3 playerForward = Camera.main.transform.forward;
+        playerForward.y = 0; // Appiattiamo il vettore (niente rotazioni verso l'alto/basso)
+        playerForward.Normalize();
+
+        // Determiniamo la direzione cardinale più vicina
+        Quaternion lookRotation;
+        if (Mathf.Abs(playerForward.x) > Mathf.Abs(playerForward.z))
+        {
+            // Guarda a destra o sinistra (Est/Ovest)
+            lookRotation = Quaternion.LookRotation(new Vector3(Mathf.Sign(playerForward.x), 0, 0));
+        }
+        else
+        {
+            // Guarda avanti o dietro (Nord/Sud)
+            lookRotation = Quaternion.LookRotation(new Vector3(0, 0, Mathf.Sign(playerForward.z)));
+        }
+        // ---------------------------------
+
+        GameObject placedObject = Instantiate(item.placeablePrefab, worldPosition, lookRotation);
 
         placedObject
             .GetComponent<PlaceableObject>()
             .GridPosition = gridPosition;
 
         placedObjects.Add(gridPosition, placedObject);
+
+        // --- LOGICA DI CONNESSIONE ---
+        IOBlock nuovoIO = placedObject.GetComponent<IOBlock>();
+        if (nuovoIO != null)
+        {
+            UpdateGridConnections(gridPosition, nuovoIO);
+        }
     }
 
     private void BreakStructure()
@@ -102,3 +175,8 @@ public class PlacementSystem : MonoBehaviour
         Destroy(target.gameObject);
     }
 }
+
+
+
+
+

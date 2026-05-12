@@ -1,40 +1,41 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Base class for blocks that handle input/output logic and connections.
+/// </summary>
 public abstract class IOBlock : BlockBase
 {
-    [Header("Connessioni")]
-    public List<Transform> inputs = new List<Transform>(); // Inizializziamo la lista vuota
+    [Header("Connection References")]
+    public List<Transform> inputs = new List<Transform>();
     public Transform output; 
-    
     public IOBlock nextBlock; 
-
 
     protected virtual void Start()
     {
-        if (nextBlock != null)
+        // Ensure connection is registered at startup if pre-configured in the inspector
+        if (nextBlock != null && !nextBlock.inputs.Contains(this.output))
         {
-            if (!nextBlock.inputs.Contains(this.output))
-            {
-                nextBlock.inputs.Add(this.output);
-            }
+            nextBlock.inputs.Add(this.output);
         }
     }
 
-    // QUESTA è la funzione magica che userà il tuo amico
+    /// <summary>
+    /// Establishes a link between this block and a target block.
+    /// </summary>
     public void ConnectTo(IOBlock targetBlock)
     {
-        // 1. Imposto il bersaglio come mio prossimo blocco
         nextBlock = targetBlock;
 
-        // 2. Vado nel blocco bersaglio e gli aggiungo il MIO output alla SUA lista di input
         if (targetBlock != null && !targetBlock.inputs.Contains(this.output))
         {
             targetBlock.inputs.Add(this.output);
         }
     }
 
-    // Funzione per scollegare (utile quando distruggi un blocco sulla griglia)
+    /// <summary>
+    /// Severs the connection with the next block and updates its input list.
+    /// </summary>
     public void Disconnect()
     {
         if (nextBlock != null)
@@ -44,17 +45,13 @@ public abstract class IOBlock : BlockBase
         }
     }
 
-    public virtual bool CanReceiveItem() 
-    { 
-        return false; 
-    }
+    public virtual bool CanReceiveItem() => false;
 
-    public virtual void ReceiveItem(GameObject item, Transform entryPoint) 
-    { 
-    }
+    public virtual void ReceiveItem(GameObject item, Transform entryPoint) { }
 
     protected virtual void OnDrawGizmos()
     {
+        // Visual debugging for input (Blue) and output (Red) ports
         Gizmos.color = Color.blue;
         foreach(var input in inputs) if(input != null) Gizmos.DrawSphere(input.position, 0.1f);
         
