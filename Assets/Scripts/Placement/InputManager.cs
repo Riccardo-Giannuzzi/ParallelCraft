@@ -41,7 +41,7 @@ public class InputManager : MonoBehaviour
         return false;
     }
 
-    public PlaceableObject GetTargetedPlaceable()
+    public PlaceableBlock GetTargetedPlaceable()
     {
         Ray ray = new Ray(
             sceneCamera.transform.position,
@@ -52,7 +52,7 @@ public class InputManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, breakableLayerMask))
         {
-            return hit.collider.GetComponent<PlaceableObject>();
+            return hit.collider.GetComponent<PlaceableBlock>();
         }
 
         return null;
