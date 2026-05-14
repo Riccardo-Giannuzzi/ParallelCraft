@@ -7,7 +7,7 @@ public enum ItemType
 }
 
 [System.Serializable]
-public class ItemData
+public class ToolData
 {
     public string itemName;
 

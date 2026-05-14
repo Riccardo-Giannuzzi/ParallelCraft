@@ -14,7 +14,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private ConnectionSystem connectionSystem;
 
-    private Dictionary<Vector3Int, GameObject> placedObjects = new Dictionary<Vector3Int, GameObject>();
+    private Dictionary<Vector3Int, PlaceableBlock> placedBlocks = new Dictionary<Vector3Int, PlaceableBlock>();
 
     private void Start()
     {
@@ -43,7 +43,7 @@ public class PlacementSystem : MonoBehaviour
 
     private void ClickEvent()
     {
-        ItemData currentItem = inventory.GetCurrentItem();
+        ToolData currentItem = inventory.GetCurrentItem();
 
         if (currentItem == null)
             return;
@@ -60,40 +60,58 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
-    private void PlaceBlock(ItemData item)
+    private void PlaceBlock(ToolData item)
     {
         if (!inputManager.TryGetSelectedMapPosition(out Vector3 position))
         {
             return;
         }
 
-        Vector3Int gridPosition = grid.WorldToCell(position);
+        Vector3Int gridPosition =
+            grid.WorldToCell(position);
 
-        if (placedObjects.ContainsKey(gridPosition))
+        if (placedBlocks.ContainsKey(gridPosition))
         {
             return;
         }
 
-        Vector3 worldPosition = grid.CellToWorld(gridPosition) + grid.cellSize / 2;
+        Vector3 worldPosition =
+            grid.CellToWorld(gridPosition)
+            + grid.cellSize / 2;
+
+        BlockRotation rotation =
+            GetPlayerRotation();
+
+        Quaternion worldRotation =
+            RotationToQuaternion(rotation);
 
         GameObject placedObject = Instantiate(
             item.placeablePrefab,
             worldPosition,
-            Quaternion.identity
+            worldRotation
         );
 
-        placedObject
-            .GetComponent<PlaceableBlock>()
-            .GridPosition = gridPosition;
+        PlaceableBlock placeable =
+            placedObject.GetComponent<PlaceableBlock>();
 
-        placedObjects.Add(gridPosition, placedObject);
+        placeable.GridPosition = gridPosition;
+        placeable.rotation = rotation;
 
-        IOBlock ioBlock = placedObject.GetComponent<IOBlock>();
+        placedBlocks.Add(
+            gridPosition,
+            placeable
+        );
+
+        IOBlock ioBlock =
+            placedObject.GetComponent<IOBlock>();
+
         if (ioBlock != null)
         {
-            connectionSystem.ConnectBlock(ioBlock);
+            connectionSystem.ConnectBlock(
+                ioBlock,
+                placedBlocks
+            );
         }
-
     }
 
     private void BreakStructure()
@@ -106,7 +124,7 @@ public class PlacementSystem : MonoBehaviour
 
         Vector3Int gridPosition = target.GridPosition;
 
-        placedObjects.Remove(gridPosition);
+        placedBlocks.Remove(gridPosition);
 
         IOBlock ioBlock =target.GetComponent<IOBlock>();
 
@@ -119,16 +137,64 @@ public class PlacementSystem : MonoBehaviour
     }
 
     public bool TryGetBlock(
-    Vector3Int pos,
-    out PlaceableBlock block)
+     Vector3Int pos,
+     out PlaceableBlock block)
     {
-        if (placedObjects.TryGetValue(pos, out GameObject obj))
+        return placedBlocks.TryGetValue(
+            pos,
+            out block);
+    }
+
+    private BlockRotation GetPlayerRotation()
+    {
+        Vector3 forward =
+            Camera.main.transform.forward;
+
+        forward.y = 0;
+
+        forward.Normalize();
+
+        float dotForward =
+            Vector3.Dot(forward, Vector3.forward);
+
+        float dotRight =
+            Vector3.Dot(forward, Vector3.right);
+
+        if (Mathf.Abs(dotForward) >
+            Mathf.Abs(dotRight))
         {
-            block = obj.GetComponent<PlaceableBlock>();
-            return true;
+            if (dotForward > 0)
+                return BlockRotation.North;
+            else
+                return BlockRotation.South;
+        }
+        else
+        {
+            if (dotRight > 0)
+                return BlockRotation.East;
+            else
+                return BlockRotation.West;
+        }
+    }
+
+    private Quaternion RotationToQuaternion(
+    BlockRotation rotation)
+    {
+        switch (rotation)
+        {
+            case BlockRotation.North:
+                return Quaternion.Euler(0, 0, 0);
+
+            case BlockRotation.East:
+                return Quaternion.Euler(0, 90, 0);
+
+            case BlockRotation.South:
+                return Quaternion.Euler(0, 180, 0);
+
+            case BlockRotation.West:
+                return Quaternion.Euler(0, 270, 0);
         }
 
-        block = null;
-        return false;
+        return Quaternion.identity;
     }
 }

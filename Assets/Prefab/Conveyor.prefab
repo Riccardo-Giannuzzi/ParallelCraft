@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7582315716875795294}
   - component: {fileID: 6688957801737374887}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BackFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5172962534293259437}
   - component: {fileID: 2531834709037508495}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FrontFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,13 +105,13 @@ GameObject:
   - component: {fileID: 1997235946652646326}
   - component: {fileID: 1788890203039991085}
   - component: {fileID: 4732414494400805088}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Conveyor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1098066459418713198
 Transform:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1981321835555671473}
   - component: {fileID: 4083997733363540618}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 678340040648285204}
   - component: {fileID: 7973224298777183237}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftFace
   m_TagString: Untagged
   m_Icon: {fileID: 0}

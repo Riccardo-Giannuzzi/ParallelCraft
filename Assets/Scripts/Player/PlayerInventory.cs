@@ -4,7 +4,7 @@ public class PlayerInventory : MonoBehaviour
 {
     [Header("Inventory Slots")]
     [SerializeField]
-    private ItemData[] slots;
+    private ToolData[] slots;
 
     public int SelectedSlot { get; private set; } = 0;
 
@@ -73,7 +73,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void DeactivateAllSlots()
     {
-        foreach (ItemData item in slots)
+        foreach (ToolData item in slots)
         {
             if (item != null && item.handObject != null)
             {
@@ -91,7 +91,7 @@ public class PlayerInventory : MonoBehaviour
 
         SelectedSlot = slotIndex;
 
-        ItemData selectedItem = slots[slotIndex];
+        ToolData selectedItem = slots[slotIndex];
 
         if (selectedItem != null && selectedItem.handObject != null)
         {
@@ -99,7 +99,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public ItemData GetCurrentItem()
+    public ToolData GetCurrentItem()
     {
         if (SelectedSlot >= 0 && SelectedSlot < slots.Length)
         {
@@ -109,7 +109,7 @@ public class PlayerInventory : MonoBehaviour
         return null;
     }
 
-    public ItemData GetItem(int index)
+    public ToolData GetItem(int index)
     {
         if (index >= 0 && index < slots.Length)
         {

@@ -8,8 +8,8 @@ public class ConveyorBlock : IOBlock
 
         backFace.faceType = FaceType.Input;
 
-        leftFace.faceType = FaceType.Closed;
+        leftFace.faceType = FaceType.Input;
 
-        rightFace.faceType = FaceType.Closed;
+        rightFace.faceType = FaceType.Input;
     }
 }

@@ -1,10 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ConnectionSystem : MonoBehaviour
 {
-    [SerializeField]
-    private PlacementSystem placementSystem;
-
     private readonly Vector3Int[] directions =
     {
         Vector3Int.forward,
@@ -13,30 +11,36 @@ public class ConnectionSystem : MonoBehaviour
         Vector3Int.right
     };
 
-    public void ConnectBlock(IOBlock block)
+    public void ConnectBlock(
+        IOBlock block,
+        Dictionary<Vector3Int, PlaceableBlock> placedBlocks)
     {
         foreach (Vector3Int dir in directions)
         {
-            CheckNeighbor(block, dir);
+            CheckNeighbor(
+                block,
+                dir,
+                placedBlocks);
         }
     }
 
     private void CheckNeighbor(
         IOBlock block,
-        Vector3Int dir)
+        Vector3Int dir,
+        Dictionary<Vector3Int, PlaceableBlock> placedObjects)
     {
         Vector3Int neighborPos =
             block.GridPosition + dir;
 
-        if (!placementSystem.TryGetBlock(
+        if (!placedObjects.TryGetValue(
             neighborPos,
-            out PlaceableBlock neighborObject))
+            out PlaceableBlock neighborObj))
         {
             return;
         }
 
         IOBlock neighbor =
-            neighborObject.GetComponent<IOBlock>();
+            neighborObj.GetComponent<IOBlock>();
 
         if (neighbor == null)
             return;

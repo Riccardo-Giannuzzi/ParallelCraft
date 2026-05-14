@@ -60,4 +60,34 @@ public class IOFace : MonoBehaviour
             connectedFace = null;
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        switch (faceType)
+        {
+            case FaceType.Input:
+                Gizmos.color = Color.blue;
+                break;
+
+            case FaceType.Output:
+                Gizmos.color = Color.red;
+                break;
+
+            default:
+                Gizmos.color = Color.gray;
+                break;
+        }
+
+        Gizmos.DrawSphere(transform.position, 0.1f);
+
+        if (connectedFace != null)
+        {
+            Gizmos.color = Color.green;
+
+            Gizmos.DrawLine(
+                transform.position,
+                connectedFace.transform.position
+            );
+        }
+    }
 }

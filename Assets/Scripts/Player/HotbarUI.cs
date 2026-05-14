@@ -22,7 +22,7 @@ public class HotbarUI : MonoBehaviour
     {
         for (int i = 0; i < slotUIs.Length; i++)
         {
-            ItemData item = inventory.GetItem(i);
+            ToolData item = inventory.GetItem(i);
 
             if (item != null)
             {
