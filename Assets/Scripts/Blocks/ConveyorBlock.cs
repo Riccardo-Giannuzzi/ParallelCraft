@@ -4,6 +4,10 @@ public class ConveyorBlock : IOBlock
 {
     private IOFace processingFace;
 
+    private IOFace[] inputFaces;
+
+    private int nextInputIndex;
+
     private void Awake()
     {
         frontFace.faceType = FaceType.Output;
@@ -13,6 +17,13 @@ public class ConveyorBlock : IOBlock
         leftFace.faceType = FaceType.Input;
 
         rightFace.faceType = FaceType.Input;
+
+        inputFaces = new IOFace[]
+        {
+            leftFace,
+            backFace,
+            rightFace
+        };
     }
 
     protected override bool CanProcess()
@@ -20,22 +31,25 @@ public class ConveyorBlock : IOBlock
         if (frontFace.HasItem)
             return false;
 
-        if (leftFace.HasItem)
+        for (int i = 0; i < inputFaces.Length; i++)
         {
-            processingFace = leftFace;
-            return true;
-        }
+            int index =
+                (nextInputIndex + i)
+                % inputFaces.Length;
 
-        if (backFace.HasItem)
-        {
-            processingFace = backFace;
-            return true;
-        }
+            IOFace face =
+                inputFaces[index];
 
-        if (rightFace.HasItem)
-        {
-            processingFace = rightFace;
-            return true;
+            if (face.HasItem)
+            {
+                processingFace = face;
+
+                nextInputIndex =
+                    (index + 1)
+                    % inputFaces.Length;
+
+                return true;
+            }
         }
 
         return false;
