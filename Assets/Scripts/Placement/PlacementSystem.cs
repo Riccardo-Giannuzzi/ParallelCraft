@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlacementSystem : MonoBehaviour
 {
     [SerializeField]
-    private GameObject indicator, cellIndicator;
+    private GameObject cellIndicator;
     [SerializeField]
     private InputManager inputManager;
     [SerializeField]
@@ -22,24 +22,27 @@ public class PlacementSystem : MonoBehaviour
     }
 
     private void Update()
+{
+    if (inputManager.TryGetSelectedMapPosition(out Vector3 position))
     {
-        if (inputManager.TryGetSelectedMapPosition(out Vector3 position))
-        {
-            Vector3Int gridPosition = grid.WorldToCell(position);
+        Vector3Int gridPosition = grid.WorldToCell(position);
 
-            indicator.SetActive(true);
-            cellIndicator.SetActive(true);
+        cellIndicator.SetActive(true);
 
-            indicator.transform.position = position;
-            cellIndicator.transform.position =
-                grid.CellToWorld(gridPosition);
-        }
-        else
-        {
-            indicator.SetActive(false);
-            cellIndicator.SetActive(false);
-        }
+        cellIndicator.transform.position = grid.GetCellCenterWorld(gridPosition);
+
+        BlockRotation rotation = GetPlayerRotation();
+
+        Quaternion worldRotation = RotationToQuaternion(rotation);
+
+
+        cellIndicator.transform.rotation = worldRotation;
     }
+    else
+    {
+        cellIndicator.SetActive(false);
+    }
+}
 
     private void ClickEvent()
     {
