@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faceType: 1
   connectedFace: {fileID: 0}
+  currentItem: {fileID: 0}
 --- !u!1 &2835638484393272867
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faceType: 2
   connectedFace: {fileID: 0}
+  currentItem: {fileID: 0}
 --- !u!1 &3387963827183109872
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faceType: 0
   connectedFace: {fileID: 0}
+  currentItem: {fileID: 0}
 --- !u!1 &8277686512551234186
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,3 +317,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faceType: 0
   connectedFace: {fileID: 0}
+  currentItem: {fileID: 0}

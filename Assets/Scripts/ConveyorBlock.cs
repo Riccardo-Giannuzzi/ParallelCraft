@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class ConveyorBlock : IOBlock
 {
-    [SerializeField]
-    private float moveDelay = 1f;
-
-    private float timer;
+    private IOFace processingFace;
 
     private void Awake()
     {
@@ -18,41 +15,43 @@ public class ConveyorBlock : IOBlock
         rightFace.faceType = FaceType.Input;
     }
 
-    private void Update()
-    {
-        TryMoveInputToOutput();
-
-        TryPushOutput();
-    }
-
-    private void TryMoveInputToOutput()
+    protected override bool CanProcess()
     {
         if (frontFace.HasItem)
-            return;
+            return false;
 
-        if (!backFace.HasItem)
+        if (leftFace.HasItem)
+        {
+            processingFace = leftFace;
+            return true;
+        }
+
+        if (backFace.HasItem)
+        {
+            processingFace = backFace;
+            return true;
+        }
+
+        if (rightFace.HasItem)
+        {
+            processingFace = rightFace;
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override void CompleteProcess()
+    {
+        if (processingFace == null)
             return;
 
         frontFace.currentItem =
-            backFace.currentItem;
+            processingFace.currentItem;
 
-        backFace.currentItem = null;
+        processingFace.currentItem = null;
+
+        processingFace = null;
     }
 
-    private void TryPushOutput()
-    {
-        if (!frontFace.HasItem)
-            return;
-
-        if (frontFace.connectedFace == null)
-            return;
-
-        if (!frontFace.connectedFace.CanReceiveItem())
-            return;
-
-        frontFace.connectedFace.currentItem =
-            frontFace.currentItem;
-
-        frontFace.currentItem = null;
-    }
 }

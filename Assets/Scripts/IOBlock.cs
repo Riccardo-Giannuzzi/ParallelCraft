@@ -2,6 +2,11 @@ using UnityEngine;
 
 public abstract class IOBlock : PlaceableBlock
 {
+    protected float processDelay = 1f;
+
+    protected bool isProcessing;
+
+    protected float processTimer;
 
     [Header("Block Faces")]
     public IOFace frontFace;
@@ -11,6 +16,74 @@ public abstract class IOBlock : PlaceableBlock
     public IOFace leftFace;
 
     public IOFace rightFace;
+
+    protected virtual void Update()
+    {
+        TryStartProcess();
+
+        Process();
+
+        TryPushOutputs();
+    }
+
+    protected abstract bool CanProcess();
+    protected abstract void CompleteProcess();
+
+    private void TryStartProcess()
+    {
+        if (isProcessing)
+            return;
+
+        if (!CanProcess())
+            return;
+
+        isProcessing = true;
+
+        processTimer = processDelay;
+    }
+
+    private void Process()
+    {
+        if (!isProcessing)
+            return;
+
+        processTimer -= Time.deltaTime;
+
+        if (processTimer > 0f)
+            return;
+
+        CompleteProcess();
+
+        isProcessing = false;
+    }
+
+    protected virtual void TryPushOutputs()
+    {
+        TryPushFace(frontFace);
+        TryPushFace(backFace);
+        TryPushFace(leftFace);
+        TryPushFace(rightFace);
+    }
+
+    protected void TryPushFace(IOFace face)
+    {
+        if (face.faceType != FaceType.Output)
+            return;
+
+        if (!face.HasItem)
+            return;
+
+        if (face.connectedFace == null)
+            return;
+
+        if (!face.connectedFace.CanReceiveItem())
+            return;
+
+        face.connectedFace.currentItem =
+            face.currentItem;
+
+        face.currentItem = null;
+    }
 
     public IOFace GetFaceFromWorldDirection(Vector3Int dir)
     {
