@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class IOBlock : PlaceableBlock
 {
+    [SerializeField]
     protected float processDelay = 1f;
 
     protected bool isProcessing;
