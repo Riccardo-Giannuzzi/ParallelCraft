@@ -13,6 +13,15 @@ public class IOFace : MonoBehaviour
 
     public IOFace connectedFace;
 
+    public Item currentItem;
+
+    public bool HasItem => currentItem != null;
+
+    public bool CanReceiveItem()
+    {
+        return !HasItem;
+    }
+
     public bool IsConnected => connectedFace != null;
 
     public bool CanConnectTo(IOFace other)
