@@ -14,12 +14,12 @@ GameObject:
   - component: {fileID: 5823934179362590821}
   - component: {fileID: 526585917691693023}
   m_Layer: 7
-  m_Name: Saw
+  m_Name: Smelter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2305309497600056313
 Transform:
   m_ObjectHideFlags: 0
@@ -132,8 +132,7 @@ MonoBehaviour:
   leftFace: {fileID: 253612122583183632}
   rightFace: {fileID: 3717280197403136192}
   recipes:
-  - {fileID: 11400000, guid: 86765310ba0014a4e9f3b44a0bb5d159, type: 2}
-  - {fileID: 11400000, guid: 13cba1ab94ce7704bb48b6712c6fca86, type: 2}
+  - {fileID: 11400000, guid: 716f79ffebdd088489b25dc334197f05, type: 2}
   state: 0
 --- !u!1 &3804403375399993759
 GameObject:

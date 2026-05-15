@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de9d3cff6deddf54a9e69899781b6deb, type: 3}
-  m_Name: Rail
+  m_Script: {fileID: 11500000, guid: 20958c1e7f220bf4dbde192d33f231f1, type: 3}
+  m_Name: Wood
   m_EditorClassIdentifier: 
-  itemName: Rail
-  icon: {fileID: 0}
+  inputItems:
+  - {fileID: 11400000, guid: bf765df0a72673d419370b75a5671a15, type: 2}
+  outputItem: {fileID: 11400000, guid: d3affba465c69b647be1066d10d41a2d, type: 2}
+  processingTime: 3

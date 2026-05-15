@@ -86,6 +86,44 @@ public abstract class IOBlock : PlaceableBlock
         face.currentItem = null;
     }
 
+    protected IOFace[] GetAllFaces()
+    {
+        return new IOFace[]
+        {
+        frontFace,
+        backFace,
+        leftFace,
+        rightFace
+        };
+    }
+
+    protected IOFace[] GetInputFaces()
+    {
+        return System.Array.FindAll(
+            GetAllFaces(),
+            face => face.faceType == FaceType.Input
+        );
+    }
+
+    protected IOFace[] GetOutputFaces()
+    {
+        return System.Array.FindAll(
+            GetAllFaces(),
+            face => face.faceType == FaceType.Output
+        );
+    }
+
+    protected IOFace GetOutputFace()
+    {
+        foreach (IOFace face in GetAllFaces())
+        {
+            if (face.faceType == FaceType.Output)
+                return face;
+        }
+
+        return null;
+    }
+
     public IOFace GetFaceFromWorldDirection(Vector3Int dir)
     {
         switch (rotation)
