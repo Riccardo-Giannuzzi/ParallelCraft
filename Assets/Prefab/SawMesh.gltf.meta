@@ -15,8 +15,8 @@ ScriptedImporter:
     animationMethod: 2
     generateMipMaps: 1
     texturesReadable: 0
-    defaultMinFilterMode: 9729
-    defaultMagFilterMode: 9729
+    defaultMinFilterMode: 9728
+    defaultMagFilterMode: 9728
     anisotropicFilterLevel: 1
   instantiationSettings:
     mask: -1
