@@ -5,6 +5,9 @@ public class SourceBlock : IOBlock
     [SerializeField]
     private Item generatedItem;
 
+    [SerializeField]
+    private ItemVisual generatedItemVisual;
+
     private void Awake()
     {
         frontFace.faceType = FaceType.Output;
@@ -14,6 +17,13 @@ public class SourceBlock : IOBlock
         leftFace.faceType = FaceType.Output;
 
         rightFace.faceType = FaceType.Output;
+    }
+
+    private void Start()
+    {
+        generatedItemVisual.SetItem(
+            generatedItem
+        );
     }
 
     protected override bool CanProcess()
