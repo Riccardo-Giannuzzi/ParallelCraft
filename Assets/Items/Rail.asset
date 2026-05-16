@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Rail
   m_EditorClassIdentifier: 
   itemName: Rail
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 2ac38554f6d69344f8ae01ebf30884e0, type: 3}

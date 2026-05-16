@@ -30,7 +30,7 @@ public abstract class IOBlock : PlaceableBlock
     protected abstract bool CanProcess();
     protected abstract void CompleteProcess();
 
-    private void TryStartProcess()
+    protected virtual void TryStartProcess()
     {
         if (isProcessing)
             return;
