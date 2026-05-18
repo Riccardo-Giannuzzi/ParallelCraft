@@ -1,8 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Implementation of the sink block
+/// </summary>
 public class SinkBlock : IOBlock
 {
+    [System.Serializable]
+    public struct ItemCount
+    {
+        public Item item;
+        public int count;
+
+        public ItemCount(Item item, int count)
+        {
+            this.item = item;
+            this.count = count;
+        }
+    }
+
     [Header("Consumed Items")]
     [SerializeField]
     private List<ItemCount> consumedItems = new List<ItemCount>();
@@ -56,21 +72,20 @@ public class SinkBlock : IOBlock
     /// <summary>
     /// Adds the item to an internal consumed item list, and increases item counter.
     /// </summary> 
+    /// <param name="item">The item to be consumed and tracked.</param>
     private void ConsumeItem(Item item)
     {
-        foreach (ItemCount itemCount in consumedItems)
+        for (int i = 0; i < consumedItems.Count; i++)
         {
-            if (itemCount.item == item)
+            if (consumedItems[i].item == item)
             {
-                itemCount.count++;
+                ItemCount updatedCount = consumedItems[i];
+                updatedCount.count++;
+                consumedItems[i] = updatedCount;
                 return;
             }
         }
 
-        ItemCount newCount = new ItemCount();
-
-        newCount.item = item;
-        newCount.count = 1;
-        consumedItems.Add(newCount);
+        consumedItems.Add(new ItemCount(item, 1));
     }
 }

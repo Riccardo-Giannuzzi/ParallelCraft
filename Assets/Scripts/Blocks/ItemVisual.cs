@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+/// <summary>
+/// class for the handling of a visual item
+/// </summary>
 public class ItemVisual : MonoBehaviour
 {
     [SerializeField]

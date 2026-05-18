@@ -13,6 +13,7 @@ public class CrafterEffects : MonoBehaviour
 
     private float particleTimer;
 
+    
     private void Update()
     {
         bool isProcessing = (crafter.state == CrafterState.Processing);

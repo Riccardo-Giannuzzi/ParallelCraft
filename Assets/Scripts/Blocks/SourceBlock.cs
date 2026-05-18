@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+/// <summary>
+/// Implementation of the source block
+/// </summary>
 public class SourceBlock : IOBlock
 {
     [SerializeField]

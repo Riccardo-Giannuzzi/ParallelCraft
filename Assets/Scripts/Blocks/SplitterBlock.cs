@@ -1,5 +1,10 @@
 using UnityEngine;
 
+
+
+/// <summary>
+/// Implementation of the splitter block
+/// </summary>
 public class SplitterBlock : IOBlock
 {
     private IOFace[] outputFaces;
