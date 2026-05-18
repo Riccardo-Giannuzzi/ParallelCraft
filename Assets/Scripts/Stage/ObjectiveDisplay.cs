@@ -10,16 +10,6 @@ public class ObjectiveDisplay : MonoBehaviour
     private ItemGoalDisplay goalPrefab;
 
     [SerializeField]
-    private Image recipeImage;
+    private Sprite recipeImage;
 
-    public void SetObjective(string text)
-    {
-        objectiveText.text = text;
-    }
-
-    public void SetTimer(float timeLeft)
-    {
-        timerText.text =
-            Mathf.CeilToInt(timeLeft).ToString();
-    }
 }

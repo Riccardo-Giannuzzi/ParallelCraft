@@ -18,15 +18,16 @@ public class HotbarUI : MonoBehaviour
         UpdateSelection();
     }
 
-    private void RefreshHotbar()
+    public void RefreshHotbar()
     {
         for (int i = 0; i < slotUIs.Length; i++)
         {
-            ToolData item = inventory.GetItem(i);
+            HotbarSlot slot =
+                inventory.GetItem(i);
 
-            if (item != null)
+            if (slot != null && slot.unlocked)
             {
-                slotUIs[i].SetIcon(item.icon);
+                slotUIs[i].SetIcon(slot.icon);
             }
             else
             {

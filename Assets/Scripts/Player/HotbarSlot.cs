@@ -7,7 +7,7 @@ public enum ItemType
 }
 
 [System.Serializable]
-public class ToolData
+public class HotbarSlot
 {
     public string itemName;
 
@@ -18,4 +18,6 @@ public class ToolData
     public GameObject placeablePrefab;
 
     public Sprite icon;
+
+    public bool unlocked = true;
 }

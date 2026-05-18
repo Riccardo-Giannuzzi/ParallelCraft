@@ -11,12 +11,13 @@ public class Billboard : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector3 direction =
-            mainCamera.transform.forward;
+        Vector3 direction = mainCamera.transform.forward;
 
         direction.y = 0f;
 
-        transform.forward =
-            direction.normalized;
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            transform.forward = direction.normalized;
+        }
     }
 }

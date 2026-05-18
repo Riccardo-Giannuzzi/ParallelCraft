@@ -55,7 +55,7 @@ public class PlacementSystem : MonoBehaviour
 
     private void ClickEvent()
     {
-        ToolData currentItem = inventory.GetCurrentItem();
+        HotbarSlot currentItem = inventory.GetCurrentSlot();
 
         if (currentItem == null)
             return;
@@ -72,8 +72,11 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
-    private void PlaceBlock(ToolData item)
+    private void PlaceBlock(HotbarSlot slot)
     {
+        if (!slot.unlocked)
+            return;
+
         if (!inputManager.TryGetSelectedMapPosition(out Vector3 position))
         {
             return;
@@ -98,7 +101,7 @@ public class PlacementSystem : MonoBehaviour
             RotationToQuaternion(rotation);
 
         GameObject placedObject = Instantiate(
-            item.placeablePrefab,
+            slot.placeablePrefab,
             worldPosition,
             worldRotation
         );

@@ -4,7 +4,7 @@ public class PlayerInventory : MonoBehaviour
 {
     [Header("Inventory Slots")]
     [SerializeField]
-    private ToolData[] slots;
+    private HotbarSlot[] slots;
 
     public int SelectedSlot { get; private set; } = 0;
 
@@ -73,7 +73,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void DeactivateAllSlots()
     {
-        foreach (ToolData item in slots)
+        foreach (HotbarSlot item in slots)
         {
             if (item != null && item.handObject != null)
             {
@@ -91,7 +91,7 @@ public class PlayerInventory : MonoBehaviour
 
         SelectedSlot = slotIndex;
 
-        ToolData selectedItem = slots[slotIndex];
+        HotbarSlot selectedItem = slots[slotIndex];
 
         if (selectedItem != null && selectedItem.handObject != null)
         {
@@ -99,17 +99,24 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public ToolData GetCurrentItem()
+    public HotbarSlot GetCurrentSlot()
     {
-        if (SelectedSlot >= 0 && SelectedSlot < slots.Length)
+        if (SelectedSlot < 0 ||
+            SelectedSlot >= slots.Length)
         {
-            return slots[SelectedSlot];
+            return null;
         }
 
-        return null;
+        HotbarSlot slot =
+            slots[SelectedSlot];
+
+        if (!slot.unlocked)
+            return null;
+
+        return slot;
     }
 
-    public ToolData GetItem(int index)
+    public HotbarSlot GetItem(int index)
     {
         if (index >= 0 && index < slots.Length)
         {
@@ -117,5 +124,31 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void UnlockSlot(int index)
+    {
+        if (index < 0 || index >= slots.Length)
+            return;
+
+        slots[index].unlocked = true;
+    }
+
+    public void LockAllSlots()
+    {
+        foreach (HotbarSlot slot in slots)
+        {
+            slot.unlocked = false;
+        }
+
+        DeactivateAllSlots();
+    }
+
+    public void UnlockAllSlots()
+    {
+        foreach (HotbarSlot slot in slots)
+        {
+            slot.unlocked = true;
+        }
     }
 }
