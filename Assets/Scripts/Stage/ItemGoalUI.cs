@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemGoalDisplay : MonoBehaviour
+public class ItemGoalUI : MonoBehaviour
 {
     [SerializeField]
     private Image itemIcon;

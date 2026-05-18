@@ -8,6 +8,8 @@ public class SourceBlock : IOBlock
     [SerializeField]
     private ItemVisual generatedItemVisual;
 
+    private bool isActive;
+
     private void Awake()
     {
         frontFace.faceType = FaceType.Output;
@@ -28,6 +30,9 @@ public class SourceBlock : IOBlock
 
     protected override bool CanProcess()
     {
+        if (!isActive)
+            return false;
+
         foreach (IOFace face in GetOutputFaces())
         {
             if (!face.HasItem)
@@ -48,5 +53,15 @@ public class SourceBlock : IOBlock
                 face.currentItem = generatedItem;
             }
         }
+    }
+
+    public void Activate()
+    {
+        isActive = true;
+    }
+
+    public void Deactivate()
+    {
+        isActive = false;
     }
 }
