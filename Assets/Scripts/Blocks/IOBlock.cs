@@ -27,14 +27,20 @@ public abstract class IOBlock : PlaceableBlock
         TryPushOutputs();
     }
 
+    
     protected abstract bool CanProcess();
     protected abstract void CompleteProcess();
 
+    /// <summary>
+    /// Tries to start the processing of the item. Doesn't work if it's already processing something else.
+    /// </summary>
     protected virtual void TryStartProcess()
     {
+        //evaluates if an item is already being processed
         if (isProcessing)
             return;
 
+        //method implemented by inherited classes
         if (!CanProcess())
             return;
 
@@ -43,6 +49,9 @@ public abstract class IOBlock : PlaceableBlock
         processTimer = processDelay;
     }
 
+    /// <summary>
+    /// Processes the item for a set amount of time, depending on the specific implementation of IOBlock.
+    /// </summary>
     private void Process()
     {
         if (!isProcessing)
@@ -58,6 +67,9 @@ public abstract class IOBlock : PlaceableBlock
         isProcessing = false;
     }
 
+    /// <summary>
+    /// Tries to push all the output faces to connected inputs(if there are any).
+    /// </summary>
     protected virtual void TryPushOutputs()
     {
         TryPushFace(frontFace);
@@ -66,6 +78,10 @@ public abstract class IOBlock : PlaceableBlock
         TryPushFace(rightFace);
     }
 
+    /// <summary>
+    /// Checks if the chosen face is of output type, has an item, and tries to the next connected input face, if it's not null
+    /// </summary>
+    /// <param name="face">The other face</param>
     protected void TryPushFace(IOFace face)
     {
         if (face.faceType != FaceType.Output)
@@ -86,33 +102,37 @@ public abstract class IOBlock : PlaceableBlock
         face.currentItem = null;
     }
 
+    /// <summary>
+    /// Returns all block faces as an array
+    /// </summary>
+    /// <returns>Array with all face references</returns> 
     protected IOFace[] GetAllFaces()
     {
-        return new IOFace[]
-        {
-        frontFace,
-        backFace,
-        leftFace,
-        rightFace
-        };
+        return new IOFace[] {frontFace, backFace, leftFace, rightFace};
     }
 
+    /// <summary>
+    /// Returns all block input faces as an array
+    /// </summary>
+    /// <returns>Array with all face references</returns> 
     protected IOFace[] GetInputFaces()
     {
-        return System.Array.FindAll(
-            GetAllFaces(),
-            face => face.faceType == FaceType.Input
-        );
+        return System.Array.FindAll(GetAllFaces(), face => face.faceType == FaceType.Input);
     }
 
+    /// <summary>
+    /// Returns all block output faces as an array.
+    /// </summary>
+    /// <returns>Array with all face references</returns> 
     protected IOFace[] GetOutputFaces()
     {
-        return System.Array.FindAll(
-            GetAllFaces(),
-            face => face.faceType == FaceType.Output
-        );
+        return System.Array.FindAll(GetAllFaces(), face => face.faceType == FaceType.Output);
     }
 
+    /// <summary>
+    /// Returns all block output faces as an array.
+    /// </summary>
+    /// <returns>Array with all face references</returns> 
     protected IOFace GetOutputFace()
     {
         foreach (IOFace face in GetAllFaces())
@@ -124,6 +144,10 @@ public abstract class IOBlock : PlaceableBlock
         return null;
     }
 
+    /// <summary>
+    /// Returns the face given a direction.
+    /// </summary>
+    /// <returns>selected Face</returns> 
     public IOFace GetFaceFromWorldDirection(Vector3Int dir)
     {
         switch (rotation)
