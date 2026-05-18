@@ -7,6 +7,10 @@ public enum FaceType
     Output
 }
 
+
+/// <summary>
+/// IO face class
+/// </summary>
 public class IOFace : MonoBehaviour
 {
     public FaceType faceType;

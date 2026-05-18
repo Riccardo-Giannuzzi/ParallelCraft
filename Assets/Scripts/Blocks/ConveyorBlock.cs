@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-
+/// <summary>
+/// Conveyor belt block
+/// </summary>
 public class ConveyorBlock : IOBlock
 {
     private IOFace processingFace;
@@ -189,10 +191,10 @@ public class ConveyorBlock : IOBlock
     }
 
     /// <summary>
-    /// Identifies the graphical component mapping directly over a designated raw directional system face.
+    /// Identifies which logical directionality the face has
     /// </summary>
-    /// <param name="face">The layout reference target input check.</param>
-    /// <returns>The bound <see cref="ItemVisual"/> class instance object, or null if no mapping matches.</returns>
+    /// <param name="face">the face to check</param>
+    /// <returns>The bound <see cref="ConveyorBlock"/> class instance object, or null if no mapping matches.</returns>
     private ItemVisual GetInputVisual(IOFace face)
     {
         if (face == backFace)

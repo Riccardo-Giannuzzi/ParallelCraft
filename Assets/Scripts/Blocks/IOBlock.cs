@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+/// <summary>
+/// IO base block abstract class
+/// </summary>
 public abstract class IOBlock : PlaceableBlock
 {
     [SerializeField]

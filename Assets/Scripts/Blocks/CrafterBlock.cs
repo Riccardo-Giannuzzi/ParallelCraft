@@ -8,6 +8,9 @@ public enum CrafterState
     Blocked
 }
 
+/// <summary>
+/// Implementation of the crafter block
+/// </summary>
 public class CrafterBlock : IOBlock
 {
     [Header("Crafter")]
@@ -17,7 +20,6 @@ public class CrafterBlock : IOBlock
     public CrafterState state;
 
     private Recipe activeRecipe;
-
 
 
     /// <summary>
@@ -85,8 +87,7 @@ public class CrafterBlock : IOBlock
     /// <returns>True if all required ingredients are present; otherwise, false.</returns>
     private bool RecipeMatches(Recipe recipe)
     {
-        List<Item> availableItems =
-            new List<Item>();
+        List<Item> availableItems = new List<Item>();
 
         foreach (IOFace face in GetInputFaces())
         {

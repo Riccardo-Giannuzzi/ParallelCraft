@@ -15,9 +15,7 @@ public class CrafterEffects : MonoBehaviour
 
     private void Update()
     {
-        bool isProcessing =
-            crafter.state ==
-            CrafterState.Processing;
+        bool isProcessing = (crafter.state == CrafterState.Processing);
 
         if (isProcessing)
         {
@@ -26,9 +24,7 @@ public class CrafterEffects : MonoBehaviour
             if (particleTimer <= 0f)
             {
                 processingParticles.Play();
-
-                particleTimer =
-                    particleInterval;
+                particleTimer = particleInterval;
             }
         }
     }
