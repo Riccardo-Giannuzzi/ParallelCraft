@@ -14,6 +14,15 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private ConnectionSystem connectionSystem;
 
+    [SerializeField]
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip placeSound;
+
+    [SerializeField]
+    private AudioClip breakSound;
+
     private Dictionary<Vector3Int, PlaceableBlock> placedBlocks = new Dictionary<Vector3Int, PlaceableBlock>();
 
     private void Start()
@@ -53,7 +62,7 @@ public class PlacementSystem : MonoBehaviour
 
         if (currentItem.itemType == ItemType.Tool)
         {
-            BreakStructure();
+            BreakBlock();
             return;
         }
 
@@ -94,6 +103,9 @@ public class PlacementSystem : MonoBehaviour
             worldRotation
         );
 
+        audioSource.pitch = Random.Range(0.95f, 1.05f);
+        audioSource.PlayOneShot(placeSound);
+
         PlaceableBlock placeable =
             placedObject.GetComponent<PlaceableBlock>();
 
@@ -105,8 +117,7 @@ public class PlacementSystem : MonoBehaviour
             placeable
         );
 
-        IOBlock ioBlock =
-            placedObject.GetComponent<IOBlock>();
+        IOBlock ioBlock = placedObject.GetComponent<IOBlock>();
 
         if (ioBlock != null)
         {
@@ -117,7 +128,7 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
-    private void BreakStructure()
+    private void BreakBlock()
     {
         PlaceableBlock target =
             inputManager.GetTargetedPlaceable();
@@ -136,6 +147,8 @@ public class PlacementSystem : MonoBehaviour
             connectionSystem.DisconnectBlock(ioBlock);
         }
 
+        audioSource.pitch = Random.Range(0.95f, 1.05f);
+        audioSource.PlayOneShot(breakSound);
         Destroy(target.gameObject);
     }
 
