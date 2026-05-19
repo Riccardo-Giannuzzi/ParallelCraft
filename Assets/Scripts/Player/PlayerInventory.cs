@@ -102,8 +102,13 @@ public class PlayerInventory : MonoBehaviour
         SelectedSlot = slotIndex;
         HotbarSlot selectedItem = slots[slotIndex];
 
-        if (selectedItem != null && selectedItem.handObject != null)
+        if (!selectedItem.unlocked)
+            return;
+
+        if (selectedItem.handObject != null)
+        {
             selectedItem.handObject.SetActive(true);
+        }
     }
 
 

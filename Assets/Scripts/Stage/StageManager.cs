@@ -273,6 +273,10 @@ public class StageManager : MonoBehaviour
 
         timer = currentStage.timeLimit;
 
+        playerInventory.UpdateUnlockedSlots(currentStageIndex);
+
+        hotbarUI.RefreshHotbar();
+
         objectiveDisplay.ShowStage(currentStage);
 
         UpdateGoals();
