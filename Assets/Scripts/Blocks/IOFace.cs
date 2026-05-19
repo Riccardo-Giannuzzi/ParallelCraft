@@ -45,17 +45,11 @@ public class IOFace : MonoBehaviour
         if (IsConnected || other.IsConnected)
             return false;
 
-        if (faceType == FaceType.Input &&
-            other.faceType == FaceType.Output)
-        {
+        if (faceType == FaceType.Input && other.faceType == FaceType.Output)
             return true;
-        }
 
-        if (faceType == FaceType.Output &&
-            other.faceType == FaceType.Input)
-        {
+        if (faceType == FaceType.Output && other.faceType == FaceType.Input)
             return true;
-        }
 
         return false;
     }

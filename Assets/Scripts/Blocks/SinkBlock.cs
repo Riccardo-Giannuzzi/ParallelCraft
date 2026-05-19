@@ -99,9 +99,7 @@ public class SinkBlock : IOBlock
         foreach (ItemCount itemCount in consumedItems)
         {
             if (itemCount.item == item)
-            {
                 return itemCount.count;
-            }
         }
 
         return 0;

@@ -49,7 +49,6 @@ public abstract class IOBlock : PlaceableBlock
             return;
 
         isProcessing = true;
-
         processTimer = processDelay;
     }
 
@@ -67,7 +66,6 @@ public abstract class IOBlock : PlaceableBlock
             return;
 
         CompleteProcess();
-
         isProcessing = false;
     }
 
@@ -154,12 +152,9 @@ public abstract class IOBlock : PlaceableBlock
     public virtual void ClearItems()
     {
         foreach (IOFace face in GetAllFaces())
-        {
             face.currentItem = null;
-        }
 
         isProcessing = false;
-
         processTimer = 0f;
     }
 
