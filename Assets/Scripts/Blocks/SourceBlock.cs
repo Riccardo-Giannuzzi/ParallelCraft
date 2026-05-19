@@ -16,7 +16,6 @@ public class SourceBlock : IOBlock
     private int unlockStage;
 
     private bool isActive;
-    private bool isUnlocked;
 
     [SerializeField]
     private GameObject lockedModel;
@@ -99,8 +98,6 @@ public class SourceBlock : IOBlock
     /// </summary>
     public void Unlock()
     {
-        isUnlocked = true;
-
         unlockedModel.SetActive(true);
         lockedModel.SetActive(false);
     }
@@ -110,8 +107,6 @@ public class SourceBlock : IOBlock
     /// </summary>
     public void Lock()
     {
-        isUnlocked = false;
-
         unlockedModel.SetActive(false);
         lockedModel.SetActive(true);
         Deactivate();
