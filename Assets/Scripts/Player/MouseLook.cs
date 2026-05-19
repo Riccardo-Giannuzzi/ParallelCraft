@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+/// <summary>
+/// Handles mouse look functionality for the player.
+/// </summary>
 public class MouseLook : MonoBehaviour
 {
     public enum MouseRotation
@@ -16,17 +20,14 @@ public class MouseLook : MonoBehaviour
 
     public float minimumVert = -90.0f;
     public float maximumVert = 90.0f;
-    private float verticalRot = 0; // vertical rotation angle
-    private float horizontalRot = 0; // horizontal rotation angle
+    private float verticalRot = 0; 
+    private float horizontalRot = 0; 
 
     void Start()
     {
         Rigidbody body = GetComponent<Rigidbody>();
-        // This component may not have been added, so check if it exists
         if (body != null)
-        {
             body.freezeRotation = true;
-        }
     }
 
     void Update()
@@ -38,9 +39,7 @@ public class MouseLook : MonoBehaviour
                 break;
             case MouseRotation.VerticalRotation:
                 verticalRot -= Input.GetAxis("Mouse Y") * sensitivityVert;
-                // Clamp the vertical angle between minimum and maximum limits
                 verticalRot = Mathf.Clamp(verticalRot, minimumVert, maximumVert);
-                // Create a new vector from the stored rotation values.
                 transform.localEulerAngles = new Vector3(verticalRot, horizontalRot, 0);
                 break;
             case MouseRotation.BothRotation:

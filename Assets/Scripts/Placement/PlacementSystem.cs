@@ -67,7 +67,7 @@ public class PlacementSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles the player's click input for placing and breaking blocks. Should be registered to the InputManager's OnClicked event.
+    /// Handles the player's click input for placing and breaking blocks.
     /// If the player is holding a placeable item, it will attempt to place it. If they are holding a tool, it will attempt to break the targeted block.
     /// </summary>
     private void ClickEvent()
@@ -161,7 +161,7 @@ public class PlacementSystem : MonoBehaviour
 
         audioSource.pitch = Random.Range(0.95f, 1.05f);
         audioSource.PlayOneShot(breakSound);
-        
+
         Destroy(target.gameObject);
     }
 
