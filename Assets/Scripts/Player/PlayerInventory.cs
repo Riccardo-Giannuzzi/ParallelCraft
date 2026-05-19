@@ -106,9 +106,7 @@ public class PlayerInventory : MonoBehaviour
             return;
 
         if (selectedItem.handObject != null)
-        {
             selectedItem.handObject.SetActive(true);
-        }
     }
 
 

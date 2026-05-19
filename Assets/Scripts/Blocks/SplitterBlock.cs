@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Implementation of the splitter block
+/// Implementation of the splitter block. The splitter block takes items from its input face and distributes them to its output faces in a round-robin manner.
 /// </summary>
 public class SplitterBlock : IOBlock
 {

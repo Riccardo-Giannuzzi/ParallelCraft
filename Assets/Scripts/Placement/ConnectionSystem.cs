@@ -17,8 +17,8 @@ public class ConnectionSystem : MonoBehaviour
     /// <summary>
     /// Checks the neighbors of the given block and connects them if they are IOBlocks.
     /// </summary>
-    /// <param name="block"></param>
-    /// <param name="placedBlocks"></param>
+    /// <param name="block">The IOBlock to connect to its neighbors.</param>
+    /// <param name="placedBlocks">Dictionary of all placed blocks in the world.</param>
     public void ConnectBlock(
         IOBlock block,
         Dictionary<Vector3Int, PlaceableBlock> placedBlocks)
@@ -30,9 +30,9 @@ public class ConnectionSystem : MonoBehaviour
     /// <summary>
     /// Checks a single neighbor in the given direction and connects it if it is an IOBlock.
     /// </summary>
-    /// <param name="block"></param>
-    /// <param name="dir"></param>
-    /// <param name="placedObjects"></param>
+    /// <param name="block">The IOBlock to check neighbors for.</param>
+    /// <param name="dir">The direction to check.</param>
+    /// <param name="placedObjects">Dictionary of all placed blocks in the world.</param>
     private void CheckNeighbor(
         IOBlock block,
         Vector3Int dir,
@@ -60,7 +60,7 @@ public class ConnectionSystem : MonoBehaviour
     /// <summary>
     /// Disconnects all faces of the given block. Should be called when a block is removed.
     /// </summary>
-    /// <param name="block"></param>
+    /// <param name="block">The IOBlock to disconnect.</param>
     public void DisconnectBlock(IOBlock block)
     {
         block.frontFace.Disconnect();

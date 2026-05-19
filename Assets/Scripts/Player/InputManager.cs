@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
     /// <summary>
     /// Gets the world position of the block the player is currently targeting for placement, if any. 
     /// </summary>
-    /// <param name="position"></param>
+    /// <param name="position">block coordinates in the 3d space</param>
     /// <returns>True if a block is aimed to; False otherwise</returns>
     public bool TryGetSelectedMapPosition(out Vector3 position)
     {

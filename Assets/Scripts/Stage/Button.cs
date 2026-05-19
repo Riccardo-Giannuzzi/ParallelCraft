@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class Button :
-    MonoBehaviour,
-    IInteractable
+
+/// <summary>
+/// Represents a button in the game world that the player can interact with to trigger an action.
+/// </summary>
+public class Button : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private StageManager stageManager;
@@ -19,6 +21,9 @@ public class Button :
 
     private bool isPressed;
 
+    /// <summary>
+    /// Triggers the button press animation and starts the production process in the stage manager.
+    /// </summary>
     public void Interact()
     {
         if (isPressed)
@@ -27,28 +32,23 @@ public class Button :
         StartCoroutine(PressAnimation());
     }
 
+    /// <summary>
+    /// Animates the button press.
+    /// </summary>
     private IEnumerator PressAnimation()
     {
         isPressed = true;
 
-        Vector3 start =
-            buttonVisual.localPosition;
-
-        Vector3 pressed =
-            start + Vector3.down * pressDistance;
+        Vector3 start = buttonVisual.localPosition;
+        Vector3 pressed = start + Vector3.down * pressDistance;
 
         float timer = 0f;
 
         while (timer < animationTime)
         {
             timer += Time.deltaTime;
-
-            float t =
-                timer / animationTime;
-
-            buttonVisual.localPosition =
-                Vector3.Lerp(start, pressed, t);
-
+            float t = timer / animationTime;
+            buttonVisual.localPosition = Vector3.Lerp(start, pressed, t);
             yield return null;
         }
 
@@ -59,18 +59,12 @@ public class Button :
         while (timer < animationTime)
         {
             timer += Time.deltaTime;
-
-            float t =
-                timer / animationTime;
-
-            buttonVisual.localPosition =
-                Vector3.Lerp(pressed, start, t);
-
+            float t = timer / animationTime;
+            buttonVisual.localPosition = Vector3.Lerp(pressed, start, t);
             yield return null;
         }
 
         buttonVisual.localPosition = start;
-
         isPressed = false;
     }
 }

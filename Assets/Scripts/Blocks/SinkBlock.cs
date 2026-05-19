@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Implementation of the sink block
+/// Implementation of the sink block. The sink block consumes items from its input faces and tracks the count of each item consumed.
 /// </summary>
 public class SinkBlock : IOBlock
 {

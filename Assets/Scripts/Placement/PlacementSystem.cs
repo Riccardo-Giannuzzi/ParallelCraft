@@ -93,7 +93,7 @@ public class PlacementSystem : MonoBehaviour
     /// <summary>
     /// Registers a newly placed block in the placedBlocks dictionary and connects it to its neighbors if it is an IOBlock. 
     /// </summary>
-    /// <param name="block"></param>
+    /// <param name="block">Newly placed block</param>
     public void RegisterBlock(PlaceableBlock block)
     {
         Vector3Int gridPosition = grid.WorldToCell(block.transform.position);
@@ -109,7 +109,7 @@ public class PlacementSystem : MonoBehaviour
     /// <summary>
     /// Attempts to place a block based on the given hotbar slot. Checks if the player can place the block at the targeted position and if so, instantiates it and registers it. Also plays a placement sound.
     /// </summary>
-    /// <param name="slot"></param>
+    /// <param name="slot">The hotbar slot corresponding to the block we want to place</param>
     private void PlaceBlock(HotbarSlot slot)
     {
         if (!slot.unlocked)
@@ -168,8 +168,8 @@ public class PlacementSystem : MonoBehaviour
     /// <summary>
     /// Tries to get a block at the given grid position from the placedBlocks dictionary. 
     /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="block"></param>
+    /// <param name="pos">position in 3d space where we want to try get a block</param>
+    /// <param name="block">where to place the block reference, in case</param>
     /// <returns>True if the block is present and gets returned correctly; False otherwise</returns>
     public bool TryGetBlock(Vector3Int pos, out PlaceableBlock block)
     {
@@ -227,7 +227,7 @@ public class PlacementSystem : MonoBehaviour
     /// <summary>
     /// Converts a BlockRotation to a Quaternion for rotating the block when placing it and for rotating the cell indicator.
     /// </summary>
-    /// <param name="rotation"></param>
+    /// <param name="rotation">Rotation parameter</param>
     /// <returns>the resulting Quaternion object</returns>
     private Quaternion RotationToQuaternion(BlockRotation rotation)
     {

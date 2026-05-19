@@ -37,18 +37,13 @@ public class HotbarUI : MonoBehaviour
             if (slot == null)
             {
                 slotUIs[i].SetIcon(null);
-
                 continue;
             }
 
             if (slot.unlocked)
-            {
                 slotUIs[i].SetIcon(slot.icon);
-            }
             else
-            {
                 slotUIs[i].SetIcon(lockedIcon);
-            }
         }
     }
 

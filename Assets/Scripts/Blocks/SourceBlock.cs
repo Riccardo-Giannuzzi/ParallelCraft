@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Implementation of the source block
+/// Implementation of the source block. The source block generates a specific item on its output faces when activated.
 /// </summary>
 public class SourceBlock : IOBlock
 {
