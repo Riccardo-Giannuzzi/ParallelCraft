@@ -53,8 +53,10 @@ public class Button : MonoBehaviour, IInteractable
     }
 
     /// <summary>
-    /// Animates the button press.
+    /// Animates the button press. if startProduction is true, the stage manager will start production after the button is pressed; otherwise, it will abort production.
+    /// The button will return to its original position after the animation is complete.
     /// </summary>
+    /// <param name="startProduction">Whether to start production after the button press.</param>
     private IEnumerator PressAnimation(bool startProduction)
     {
         isPressed = true;
@@ -73,13 +75,9 @@ public class Button : MonoBehaviour, IInteractable
         }
 
         if (startProduction)
-        {
             stageManager.StartProduction();
-        }
         else
-        {
             stageManager.AbortProduction();
-        }
 
         timer = 0f;
 
@@ -97,27 +95,19 @@ public class Button : MonoBehaviour, IInteractable
 
     private StagePhase lastPhase;
 
+    /// <summary>
+    /// Updates the button's material based on the current phase of the stage. If the stage is in the production phase, the button will use the running material; otherwise, it will use the ready material.
+    /// </summary>
     private void Update()
     {
-        if (lastPhase ==
-            stageManager.CurrentPhase)
-        {
+        if (lastPhase == stageManager.CurrentPhase)
             return;
-        }
 
-        lastPhase =
-            stageManager.CurrentPhase;
+        lastPhase = stageManager.CurrentPhase;
 
-        if (lastPhase ==
-            StagePhase.Production)
-        {
-            buttonRenderer.material =
-                runningMaterial;
-        }
+        if (lastPhase == StagePhase.Production)
+            buttonRenderer.material = runningMaterial;
         else
-        {
-            buttonRenderer.material =
-                readyMaterial;
-        }
+            buttonRenderer.material = readyMaterial;
     }
 }

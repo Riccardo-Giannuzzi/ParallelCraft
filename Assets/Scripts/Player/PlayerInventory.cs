@@ -127,17 +127,20 @@ public class PlayerInventory : MonoBehaviour
         return slot;
     }
 
-    public void UpdateUnlockedSlots(
-    int currentStage)
+    /// <summary>
+    /// Unlocks hotbar slots available for the current stage.
+    /// </summary>
+    public void UpdateUnlockedSlots(int currentStage)
     {
         foreach (HotbarSlot slot in slots)
-        {
-            slot.unlocked =
-                slot.unlockStage <= currentStage;
-        }
+            slot.unlocked = slot.unlockStage <= currentStage;
     }
 
-
+    /// <summary>
+    /// Returns the hotbar slot at the given index.
+    /// </summary>
+    /// <param name="index">The index of the hotbar slot to retrieve.</param>
+    /// <returns>The hotbar slot at the specified index, or null if the index is out of range.</returns>
     public HotbarSlot GetItem(int index)
     {
         if (index >= 0 && index < slots.Length)
@@ -145,6 +148,10 @@ public class PlayerInventory : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Unlocks the hotbar slot at the given index.
+    /// </summary>
+    /// <param name="index">The index of the hotbar slot to unlock.</param>
     public void UnlockSlot(int index)
     {
         if (index < 0 || index >= slots.Length)
@@ -153,6 +160,9 @@ public class PlayerInventory : MonoBehaviour
         slots[index].unlocked = true;
     }
 
+    /// <summary>
+    /// Locks every hotbar slot and clears selection.
+    /// </summary>
     public void LockAllSlots()
     {
         foreach (HotbarSlot slot in slots)
@@ -161,6 +171,9 @@ public class PlayerInventory : MonoBehaviour
         UnselectAllSlots();
     }
 
+    /// <summary>
+    /// Unlocks every hotbar slot.
+    /// </summary>
     public void UnlockAllSlots()
     {
         foreach (HotbarSlot slot in slots)
