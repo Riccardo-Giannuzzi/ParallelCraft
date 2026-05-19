@@ -12,6 +12,9 @@ public class HotbarUI : MonoBehaviour
     [SerializeField]
     private HotbarSlotUI[] slotUIs = new HotbarSlotUI[9];
 
+    [SerializeField]
+    private Sprite lockedIcon;
+
     void Start()
     {
         RefreshHotbar();
@@ -25,16 +28,28 @@ public class HotbarUI : MonoBehaviour
     /// <summary>
     /// Refreshes the hotbar UI to reflect the current state of the player's inventory. 
     /// </summary>
-    public void RefreshHotbar()
+    private void RefreshHotbar()
     {
         for (int i = 0; i < slotUIs.Length; i++)
         {
-            HotbarSlot slot = inventory.GetItem(i);
+            HotbarSlot slot =
+                inventory.GetItem(i);
 
-            if (slot != null && slot.unlocked)
-                slotUIs[i].SetIcon(slot.icon);
-            else
+            if (slot == null)
+            {
                 slotUIs[i].SetIcon(null);
+
+                continue;
+            }
+
+            if (slot.unlocked)
+            {
+                slotUIs[i].SetIcon(slot.icon);
+            }
+            else
+            {
+                slotUIs[i].SetIcon(lockedIcon);
+            }
         }
     }
 

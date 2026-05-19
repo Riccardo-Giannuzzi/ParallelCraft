@@ -268,7 +268,7 @@ public class StageManager : MonoBehaviour
 
         timer = currentStage.timeLimit;
 
-        playerInventory.UnlockAllSlots();
+        playerInventory.UpdateUnlockedSlots(currentStageIndex);
 
         objectiveDisplay.ShowStage(currentStage);
 

@@ -124,6 +124,16 @@ public class PlayerInventory : MonoBehaviour
         return slot;
     }
 
+    public void UpdateUnlockedSlots(
+    int currentStage)
+    {
+        foreach (HotbarSlot slot in slots)
+        {
+            slot.unlocked =
+                slot.unlockStage <= currentStage;
+        }
+    }
+
 
     public HotbarSlot GetItem(int index)
     {
