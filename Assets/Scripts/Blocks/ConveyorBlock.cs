@@ -232,6 +232,10 @@ public class ConveyorBlock : IOBlock
         visual.position = end;
     }
 
+
+    /// <summary>
+    /// Resets the block state by clearing all item references, stopping active animations, and resetting processing flags to their default values.
+    /// </summary>
     public override void ClearItems()
     {
         base.ClearItems();

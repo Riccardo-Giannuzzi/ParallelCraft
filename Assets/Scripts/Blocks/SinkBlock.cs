@@ -89,6 +89,11 @@ public class SinkBlock : IOBlock
         consumedItems.Add(new ItemCount(item, 1));
     }
 
+    /// <summary>
+    /// Gets the count of a specific item consumed by the sink block.
+    /// </summary>
+    /// <param name="item">The item for which to get the count.</param>
+    /// <returns>The number of instances of the item consumed.</returns>
     public int GetItemCount(Item item)
     {
         foreach (ItemCount itemCount in consumedItems)
@@ -102,6 +107,9 @@ public class SinkBlock : IOBlock
         return 0;
     }
 
+    /// <summary>
+    /// Resets the consumed item counts.
+    /// </summary>
     public void ResetCounts()
     {
         consumedItems.Clear();

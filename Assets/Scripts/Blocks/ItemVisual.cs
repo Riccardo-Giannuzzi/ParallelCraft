@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// class for the handling of a visual item
+/// class for the handling of a visual item in-game. Responsible for displaying the correct sprite based on the item data it receives and for clearing the visual when needed.
 /// </summary>
 public class ItemVisual : MonoBehaviour
 {
@@ -22,7 +22,6 @@ public class ItemVisual : MonoBehaviour
         }
 
         spriteRenderer.enabled = true;
-
         spriteRenderer.sprite = item.icon;
     }
 

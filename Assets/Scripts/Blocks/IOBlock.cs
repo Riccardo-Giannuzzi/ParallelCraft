@@ -148,6 +148,9 @@ public abstract class IOBlock : PlaceableBlock
         return null;
     }
 
+    /// <summary>
+    /// Resets the block state by clearing all item references and resetting processing flags to their default values.
+    /// </summary>
     public virtual void ClearItems()
     {
         foreach (IOFace face in GetAllFaces())

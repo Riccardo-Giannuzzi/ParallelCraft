@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles the visual effects for the CrafterBlock, specifically managing the particle system that plays during the processing state.
+/// </summary>
 public class CrafterEffects : MonoBehaviour
 {
     [SerializeField]

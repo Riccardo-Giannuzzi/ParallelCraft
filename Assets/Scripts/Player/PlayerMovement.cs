@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+/// <summary>
+/// Handles player movement using.
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 6.0f;
@@ -7,15 +11,16 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 5.0f;
 
     private CharacterController charController;
-    private float verticalVelocity; // Track up/down speed
+    private float verticalVelocity;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         charController = GetComponent<CharacterController>();
     }
-
-    // Update is called once per frame
+    
+    /// <summary>
+    /// Handles player movement based on input. Uses a CharacterController component to move the player, applying gravity and allowing the player to jump when grounded.
+    /// </summary>
     void Update()
     {
         float deltaX = Input.GetAxis("Horizontal") * speed;
@@ -29,18 +34,13 @@ public class PlayerMovement : MonoBehaviour
         // Jumping and Gravity logic
         if (charController.isGrounded)
         {
-            // A slight push down keeps the character firmly on the ground
             verticalVelocity = gravity;
 
-            // Check if the player pressed the Spacebar
             if (Input.GetButtonDown("Jump"))
-            {
                 verticalVelocity = jumpForce;
-            }
         }
         else
         {
-            // If in the air, gradually pull them down with gravity
             verticalVelocity += gravity * Time.deltaTime;
         }
 

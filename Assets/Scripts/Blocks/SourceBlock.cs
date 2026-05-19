@@ -94,25 +94,31 @@ public class SourceBlock : IOBlock
         isActive = false;
     }
 
+    /// <summary>
+    /// Unlocks the source block, making it available for activation and item generation, while also updating the visual state to reflect its unlocked status.
+    /// </summary>
     public void Unlock()
     {
         isUnlocked = true;
 
         unlockedModel.SetActive(true);
-
         lockedModel.SetActive(false);
     }
 
+    /// <summary>
+    /// Locks the source block, preventing it from being activated or generating items, and updates the visual state to indicate its locked status.
+    /// </summary>
     public void Lock()
     {
         isUnlocked = false;
 
         unlockedModel.SetActive(false);
-
         lockedModel.SetActive(true);
-
         Deactivate();
     }
 
+    /// <summary>
+    /// Gets the stage at which the source block becomes unlocked.
+    /// </summary>
     public int UnlockStage => unlockStage;
 }
