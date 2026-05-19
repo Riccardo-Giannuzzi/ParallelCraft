@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crafter: {fileID: 809928287748639044}
   processingParticles: {fileID: 9074400492593400753}
+  particleInterval: 0.2
 --- !u!1 &2221916578313593057
 GameObject:
   m_ObjectHideFlags: 0
@@ -5025,7 +5026,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8801679490653950251, guid: ee2a58576637d1b4a9d2d931f4d51c56, type: 3}
+  - {fileID: 2100000, guid: 57b92de8d91ff0f429b81760e7eecbdb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

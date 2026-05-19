@@ -26,6 +26,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private ObjectiveDisplay objectiveDisplay;
     [SerializeField] private PlacementSystem placementSystem;
+    [SerializeField] private HotbarUI hotbarUI;
 
     [Header("Messages")]
     [SerializeField]
@@ -78,7 +79,9 @@ public class StageManager : MonoBehaviour
 
         objectiveDisplay.ShowStage(currentStage);
 
-        playerInventory.UnlockAllSlots();
+        playerInventory.UpdateUnlockedSlots(currentStageIndex);
+
+        hotbarUI.RefreshHotbar();
 
         UpdateUnlockedSources();
 
@@ -95,6 +98,8 @@ public class StageManager : MonoBehaviour
         phase = StagePhase.Production;
 
         playerInventory.LockAllSlots();
+
+        hotbarUI.RefreshHotbar();
 
         EnableSources();
     }
@@ -269,6 +274,8 @@ public class StageManager : MonoBehaviour
         timer = currentStage.timeLimit;
 
         playerInventory.UpdateUnlockedSlots(currentStageIndex);
+
+        hotbarUI.RefreshHotbar();
 
         objectiveDisplay.ShowStage(currentStage);
 
