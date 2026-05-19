@@ -15015,63 +15015,63 @@ MonoBehaviour:
     placeablePrefab: {fileID: 0}
     icon: {fileID: 21300000, guid: 3e0ef4d1a530f7a40a905635b12d7f6f, type: 3}
     unlockStage: 0
-    unlocked: 1
+    unlocked: 0
   - itemName: Conveyor
     itemType: 1
     handObject: {fileID: 3794744219848750965, guid: b6d8554564440134a9c98506dc34bebc, type: 3}
     placeablePrefab: {fileID: 969149397472520848, guid: b8c1d5cce74c24345b2a4ae8d25b1bb4, type: 3}
     icon: {fileID: 21300000, guid: 4dd94feae608513409f6fe11991e5fc6, type: 3}
     unlockStage: 0
-    unlocked: 1
+    unlocked: 0
   - itemName: Saw
     itemType: 1
     handObject: {fileID: 3794744219848750965, guid: b6d8554564440134a9c98506dc34bebc, type: 3}
     placeablePrefab: {fileID: 4655552331161213394, guid: e5226274bce32ac46a01ae888f5c922d, type: 3}
     icon: {fileID: 21300000, guid: 6ac8664d3debfbb488be02af12252fb6, type: 3}
     unlockStage: 0
-    unlocked: 1
+    unlocked: 0
   - itemName: Smelter
     itemType: 1
     handObject: {fileID: 3794744219848750965, guid: b6d8554564440134a9c98506dc34bebc, type: 3}
     placeablePrefab: {fileID: 6530149636400690196, guid: 07ed4ffc0f3cdd0428f4ed9e3f1c067e, type: 3}
     icon: {fileID: 21300000, guid: 7f6c12cbc7b31014ca252860bad6f22d, type: 3}
     unlockStage: 1
-    unlocked: 1
+    unlocked: 0
   - itemName: Crafter
     itemType: 1
     handObject: {fileID: 3794744219848750965, guid: b6d8554564440134a9c98506dc34bebc, type: 3}
     placeablePrefab: {fileID: 1177265403450613509, guid: b196e6f418caa2e45bbca9c259ef0577, type: 3}
     icon: {fileID: 21300000, guid: aacce350d9c24a64ab45b8caedef5926, type: 3}
     unlockStage: 2
-    unlocked: 1
+    unlocked: 0
   - itemName: Splitter
     itemType: 1
     handObject: {fileID: 3794744219848750965, guid: b6d8554564440134a9c98506dc34bebc, type: 3}
     placeablePrefab: {fileID: 3561879069561357517, guid: 55c3543827f367049ba8008bf5d22523, type: 3}
     icon: {fileID: 21300000, guid: 4f0aead6f87b4bf40b6bd9e6efcc37d1, type: 3}
     unlockStage: 3
-    unlocked: 1
-  - itemName: Splitter
-    itemType: 1
+    unlocked: 0
+  - itemName: Empty
+    itemType: 2
     handObject: {fileID: 3794744219848750965, guid: b6d8554564440134a9c98506dc34bebc, type: 3}
-    placeablePrefab: {fileID: 3561879069561357517, guid: 55c3543827f367049ba8008bf5d22523, type: 3}
-    icon: {fileID: 21300000, guid: 4f0aead6f87b4bf40b6bd9e6efcc37d1, type: 3}
-    unlockStage: 3
-    unlocked: 1
-  - itemName: Splitter
-    itemType: 1
+    placeablePrefab: {fileID: 0}
+    icon: {fileID: 21300000, guid: 94057ce213a3155469192b915a88acc4, type: 3}
+    unlockStage: 100
+    unlocked: 0
+  - itemName: Empty
+    itemType: 2
     handObject: {fileID: 3794744219848750965, guid: b6d8554564440134a9c98506dc34bebc, type: 3}
-    placeablePrefab: {fileID: 3561879069561357517, guid: 55c3543827f367049ba8008bf5d22523, type: 3}
+    placeablePrefab: {fileID: 0}
     icon: {fileID: 21300000, guid: 4f0aead6f87b4bf40b6bd9e6efcc37d1, type: 3}
-    unlockStage: 3
-    unlocked: 1
-  - itemName: Splitter
-    itemType: 1
+    unlockStage: 100
+    unlocked: 0
+  - itemName: Empty
+    itemType: 2
     handObject: {fileID: 3794744219848750965, guid: b6d8554564440134a9c98506dc34bebc, type: 3}
-    placeablePrefab: {fileID: 3561879069561357517, guid: 55c3543827f367049ba8008bf5d22523, type: 3}
+    placeablePrefab: {fileID: 0}
     icon: {fileID: 21300000, guid: 4f0aead6f87b4bf40b6bd9e6efcc37d1, type: 3}
-    unlockStage: 3
-    unlocked: 1
+    unlockStage: 100
+    unlocked: 0
 --- !u!4 &1308881750 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 618d51207332f7549bbeeb17f610b562, type: 3}

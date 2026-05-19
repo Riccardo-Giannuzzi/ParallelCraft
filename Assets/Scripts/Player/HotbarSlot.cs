@@ -3,7 +3,8 @@ using UnityEngine;
 public enum ItemType
 {
     Tool,
-    Placeable
+    Placeable,
+    Empty
 }
 
 [System.Serializable]

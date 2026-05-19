@@ -28,12 +28,11 @@ public class HotbarUI : MonoBehaviour
     /// <summary>
     /// Refreshes the hotbar UI to reflect the current state of the player's inventory. 
     /// </summary>
-    private void RefreshHotbar()
+    public void RefreshHotbar()
     {
         for (int i = 0; i < slotUIs.Length; i++)
         {
-            HotbarSlot slot =
-                inventory.GetItem(i);
+            HotbarSlot slot = inventory.GetItem(i);
 
             if (slot == null)
             {

@@ -13,8 +13,8 @@ public class PlayerInventory : MonoBehaviour
 
     void Start()
     {
-        DeactivateAllSlots();
-        ActivateSlot(0);
+        UnselectAllSlots();
+        SelectSlot(0);
     }
 
     void Update()
@@ -32,7 +32,7 @@ public class PlayerInventory : MonoBehaviour
         {
             KeyCode key = KeyCode.Alpha1 + i;
             if (Input.GetKeyDown(key))
-                ActivateSlot(i);
+                SelectSlot(i);
         }
     }
 
@@ -59,7 +59,7 @@ public class PlayerInventory : MonoBehaviour
         if (nextSlot >= slots.Length)
             nextSlot = 0;
 
-        ActivateSlot(nextSlot);
+        SelectSlot(nextSlot);
     }
 
     /// <summary>
@@ -74,13 +74,13 @@ public class PlayerInventory : MonoBehaviour
             nextSlot = slots.Length - 1;
         }
 
-        ActivateSlot(nextSlot);
+        SelectSlot(nextSlot);
     }
 
     /// <summary>
     /// Deactivates all hotbar slots, hiding any associated hand objects.
     /// </summary>
-    private void DeactivateAllSlots()
+    private void UnselectAllSlots()
     {
         foreach (HotbarSlot item in slots)
         {
@@ -92,12 +92,12 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Activates the specified hotbar slot, making its associated hand object visible if it is unlocked. 
     /// </summary>
-    private void ActivateSlot(int slotIndex)
+    private void SelectSlot(int slotIndex)
     {
         if (slotIndex < 0 || slotIndex >= slots.Length)
             return;
 
-        DeactivateAllSlots();
+        UnselectAllSlots();
 
         SelectedSlot = slotIndex;
         HotbarSlot selectedItem = slots[slotIndex];
@@ -155,7 +155,7 @@ public class PlayerInventory : MonoBehaviour
         foreach (HotbarSlot slot in slots)
             slot.unlocked = false;
 
-        DeactivateAllSlots();
+        UnselectAllSlots();
     }
 
     public void UnlockAllSlots()
