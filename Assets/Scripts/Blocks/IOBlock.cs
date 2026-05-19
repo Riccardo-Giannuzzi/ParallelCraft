@@ -148,6 +148,18 @@ public abstract class IOBlock : PlaceableBlock
         return null;
     }
 
+    public virtual void ClearItems()
+    {
+        foreach (IOFace face in GetAllFaces())
+        {
+            face.currentItem = null;
+        }
+
+        isProcessing = false;
+
+        processTimer = 0f;
+    }
+
     /// <summary>
     /// Returns the face given a direction.
     /// </summary>

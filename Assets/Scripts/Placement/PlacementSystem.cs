@@ -25,6 +25,19 @@ public class PlacementSystem : MonoBehaviour
 
     private Dictionary<Vector3Int, PlaceableBlock> placedBlocks = new Dictionary<Vector3Int, PlaceableBlock>();
 
+    private void Awake()
+    {
+        PlaceableBlock[] existingBlocks =
+            FindObjectsByType<PlaceableBlock>(
+                FindObjectsSortMode.None
+            );
+
+        foreach (PlaceableBlock block in existingBlocks)
+        {
+            RegisterBlock(block);
+        }
+    }
+
     private void Start()
     {
         inputManager.OnClicked += ClickEvent;
@@ -69,6 +82,35 @@ public class PlacementSystem : MonoBehaviour
         if (currentItem.itemType == ItemType.Placeable)
         {
             PlaceBlock(currentItem);
+        }
+
+    }
+
+    public void RegisterBlock(
+    PlaceableBlock block)
+    {
+        Vector3Int gridPosition =
+            grid.WorldToCell(
+                block.transform.position
+            );
+
+        block.GridPosition =
+            gridPosition;
+
+        placedBlocks.Add(
+            gridPosition,
+            block
+        );
+
+        IOBlock ioBlock =
+            block.GetComponent<IOBlock>();
+
+        if (ioBlock != null)
+        {
+            connectionSystem.ConnectBlock(
+                ioBlock,
+                placedBlocks
+            );
         }
     }
 
@@ -115,20 +157,7 @@ public class PlacementSystem : MonoBehaviour
         placeable.GridPosition = gridPosition;
         placeable.rotation = rotation;
 
-        placedBlocks.Add(
-            gridPosition,
-            placeable
-        );
-
-        IOBlock ioBlock = placedObject.GetComponent<IOBlock>();
-
-        if (ioBlock != null)
-        {
-            connectionSystem.ConnectBlock(
-                ioBlock,
-                placedBlocks
-            );
-        }
+        RegisterBlock(placeable);
     }
 
     private void BreakBlock()
@@ -162,6 +191,25 @@ public class PlacementSystem : MonoBehaviour
         return placedBlocks.TryGetValue(
             pos,
             out block);
+    }
+
+    public List<IOBlock> GetAllIOBlocks()
+    {
+        List<IOBlock> blocks =
+            new List<IOBlock>();
+
+        foreach (PlaceableBlock block in placedBlocks.Values)
+        {
+            IOBlock ioBlock =
+                block.GetComponent<IOBlock>();
+
+            if (ioBlock != null)
+            {
+                blocks.Add(ioBlock);
+            }
+        }
+
+        return blocks;
     }
 
     private BlockRotation GetPlayerRotation()

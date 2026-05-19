@@ -88,4 +88,22 @@ public class SinkBlock : IOBlock
 
         consumedItems.Add(new ItemCount(item, 1));
     }
+
+    public int GetItemCount(Item item)
+    {
+        foreach (ItemCount itemCount in consumedItems)
+        {
+            if (itemCount.item == item)
+            {
+                return itemCount.count;
+            }
+        }
+
+        return 0;
+    }
+
+    public void ResetCounts()
+    {
+        consumedItems.Clear();
+    }
 }

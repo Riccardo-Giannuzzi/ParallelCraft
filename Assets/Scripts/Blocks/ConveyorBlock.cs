@@ -231,4 +231,21 @@ public class ConveyorBlock : IOBlock
 
         visual.position = end;
     }
+
+    public override void ClearItems()
+    {
+        base.ClearItems();
+
+        StopAllCoroutines();
+
+        isPushing = false;
+
+        centerItem.Clear();
+
+        backItem.Clear();
+
+        leftItem.Clear();
+
+        rightItem.Clear();
+    }
 }

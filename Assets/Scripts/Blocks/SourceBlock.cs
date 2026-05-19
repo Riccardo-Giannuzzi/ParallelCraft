@@ -12,7 +12,17 @@ public class SourceBlock : IOBlock
     [SerializeField]
     private ItemVisual generatedItemVisual;
 
+    [SerializeField]
+    private int unlockStage;
+
     private bool isActive;
+    private bool isUnlocked;
+
+    [SerializeField]
+    private GameObject lockedModel;
+
+    [SerializeField]
+    private GameObject unlockedModel;
 
     /// <summary>
     /// Initializes the block by configuring all directional faces (front, back, left, right) to function as outputs.
@@ -26,6 +36,8 @@ public class SourceBlock : IOBlock
         leftFace.faceType = FaceType.Output;
 
         rightFace.faceType = FaceType.Output;
+
+        Lock();
     }
 
     /// <summary>
@@ -81,4 +93,26 @@ public class SourceBlock : IOBlock
     {
         isActive = false;
     }
+
+    public void Unlock()
+    {
+        isUnlocked = true;
+
+        unlockedModel.SetActive(true);
+
+        lockedModel.SetActive(false);
+    }
+
+    public void Lock()
+    {
+        isUnlocked = false;
+
+        unlockedModel.SetActive(false);
+
+        lockedModel.SetActive(true);
+
+        Deactivate();
+    }
+
+    public int UnlockStage => unlockStage;
 }

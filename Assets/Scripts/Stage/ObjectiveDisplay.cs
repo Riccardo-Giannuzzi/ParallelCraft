@@ -27,6 +27,8 @@ public class ObjectiveDisplay : MonoBehaviour
     {
         stageTitleText.text = stage.title;
 
+        SetTime(stage.timeLimit);
+
         recipeDiagramImage.sprite = stage.recipeDiagram;
 
         BuildGoals(stage);
@@ -75,11 +77,19 @@ public class ObjectiveDisplay : MonoBehaviour
 
     public void SetTime(float timeLeft)
     {
-        int seconds =
+        int totalSeconds =
             Mathf.CeilToInt(timeLeft);
 
+        int minutes =
+            totalSeconds / 60;
+
+        int seconds =
+            totalSeconds % 60;
+
         timeText.text =
-            seconds.ToString();
+            minutes.ToString() +
+            ":" +
+            seconds.ToString("00");
     }
 
     private void ClearGoals()
