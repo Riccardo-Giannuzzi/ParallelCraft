@@ -18,9 +18,6 @@ public class PlayerMovement : MonoBehaviour
         charController = GetComponent<CharacterController>();
     }
     
-    /// <summary>
-    /// Handles player movement based on input. Uses a CharacterController component to move the player, applying gravity and allowing the player to jump when grounded.
-    /// </summary>
     void Update()
     {
         float deltaX = Input.GetAxis("Horizontal") * speed;
