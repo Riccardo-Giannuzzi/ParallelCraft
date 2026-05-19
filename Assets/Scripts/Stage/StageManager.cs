@@ -211,6 +211,14 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    public void AbortProduction()
+    {
+        if (phase != StagePhase.Production)
+            return;
+
+        FailStage();
+    }
+
     private IEnumerator FlashMessageCoroutine(string message)
     {
         messageText.gameObject.SetActive(true);
@@ -281,4 +289,6 @@ public class StageManager : MonoBehaviour
 
         UpdateGoals();
     }
+
+    public StagePhase CurrentPhase => phase;
 }

@@ -20158,15 +20158,15 @@ Transform:
   m_Children:
   - {fileID: 1277703193}
   - {fileID: 2076693850}
+  - {fileID: 408847806}
+  - {fileID: 1957847533}
   - {fileID: 355444380}
-  - {fileID: 1169025430}
   - {fileID: 1922761223}
   - {fileID: 843955803}
   - {fileID: 1367308769}
-  - {fileID: 408847806}
-  - {fileID: 1957847533}
-  - {fileID: 728750232}
   - {fileID: 1358167054}
+  - {fileID: 1169025430}
+  - {fileID: 728750232}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1795945511
@@ -20367,7 +20367,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dd736eabb3aeb1f41a72f1b54234bea0, type: 2}
+  - {fileID: 2100000, guid: bd70952e9a461044c8e727d2029da3e4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20411,8 +20411,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageManager: {fileID: 1581035167}
   buttonVisual: {fileID: 1798667073}
-  pressDistance: 0.05
-  animationTime: 0.05
+  pressDistance: 0.4
+  animationTime: 0.5
+  buttonRenderer: {fileID: 1798667075}
+  readyMaterial: {fileID: 2100000, guid: bd70952e9a461044c8e727d2029da3e4, type: 2}
+  runningMaterial: {fileID: 2100000, guid: dd736eabb3aeb1f41a72f1b54234bea0, type: 2}
 --- !u!1001 &1799437691
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -21,6 +21,15 @@ public class Button : MonoBehaviour, IInteractable
 
     private bool isPressed;
 
+    [SerializeField]
+    private MeshRenderer buttonRenderer;
+
+    [SerializeField]
+    private Material readyMaterial;
+
+    [SerializeField]
+    private Material runningMaterial;
+
     /// <summary>
     /// Triggers the button press animation and starts the production process in the stage manager.
     /// </summary>
@@ -29,13 +38,24 @@ public class Button : MonoBehaviour, IInteractable
         if (isPressed)
             return;
 
-        StartCoroutine(PressAnimation());
+        if (stageManager.CurrentPhase == StagePhase.Build)
+        {
+            StartCoroutine(
+                PressAnimation(true)
+            );
+        }
+        else if (stageManager.CurrentPhase == StagePhase.Production)
+        {
+            StartCoroutine(
+                PressAnimation(false)
+            );
+        }
     }
 
     /// <summary>
     /// Animates the button press.
     /// </summary>
-    private IEnumerator PressAnimation()
+    private IEnumerator PressAnimation(bool startProduction)
     {
         isPressed = true;
 
@@ -52,7 +72,14 @@ public class Button : MonoBehaviour, IInteractable
             yield return null;
         }
 
-        stageManager.StartProduction();
+        if (startProduction)
+        {
+            stageManager.StartProduction();
+        }
+        else
+        {
+            stageManager.AbortProduction();
+        }
 
         timer = 0f;
 
@@ -66,5 +93,31 @@ public class Button : MonoBehaviour, IInteractable
 
         buttonVisual.localPosition = start;
         isPressed = false;
+    }
+
+    private StagePhase lastPhase;
+
+    private void Update()
+    {
+        if (lastPhase ==
+            stageManager.CurrentPhase)
+        {
+            return;
+        }
+
+        lastPhase =
+            stageManager.CurrentPhase;
+
+        if (lastPhase ==
+            StagePhase.Production)
+        {
+            buttonRenderer.material =
+                runningMaterial;
+        }
+        else
+        {
+            buttonRenderer.material =
+                readyMaterial;
+        }
     }
 }
