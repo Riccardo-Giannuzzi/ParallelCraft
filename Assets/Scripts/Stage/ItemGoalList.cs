@@ -4,10 +4,10 @@ using UnityEngine;
 public class ItemGoalList : MonoBehaviour
 {
     [SerializeField]
-    private ItemGoalDisplay goalPrefab;
+    private ItemGoalUI goalPrefab;
 
-    private List<ItemGoalDisplay> activeGoals =
-        new List<ItemGoalDisplay>();
+    private List<ItemGoalUI> activeGoals =
+        new List<ItemGoalUI>();
 
     public void BuildGoals(Stage stage)
     {
@@ -15,7 +15,7 @@ public class ItemGoalList : MonoBehaviour
 
         foreach (ItemGoal goal in stage.goals)
         {
-            ItemGoalDisplay entry =
+            ItemGoalUI entry =
                 Instantiate(
                     goalPrefab,
                     transform
@@ -46,7 +46,7 @@ public class ItemGoalList : MonoBehaviour
 
     private void ClearGoals()
     {
-        foreach (ItemGoalDisplay goal in activeGoals)
+        foreach (ItemGoalUI goal in activeGoals)
         {
             Destroy(goal.gameObject);
         }

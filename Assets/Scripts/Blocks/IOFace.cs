@@ -7,6 +7,10 @@ public enum FaceType
     Output
 }
 
+
+/// <summary>
+/// IO face class
+/// </summary>
 public class IOFace : MonoBehaviour
 {
     public FaceType faceType;
@@ -17,6 +21,10 @@ public class IOFace : MonoBehaviour
 
     public bool HasItem => currentItem != null;
 
+    /// <summary>
+    /// Verifies if the face has any item
+    /// </summary>
+    /// <returns>True: has item, False: doesn't have item</returns>
     public bool CanReceiveItem()
     {
         return !HasItem;
@@ -24,6 +32,11 @@ public class IOFace : MonoBehaviour
 
     public bool IsConnected => connectedFace != null;
 
+    /// <summary>
+    /// Verifies if the given face can connect logically to this one (only Input and Output faces are compatible)
+    /// </summary>
+    /// <param name="other">The other face</param>
+    /// <returns>True: can connect, False: can't connect</returns>
     public bool CanConnectTo(IOFace other)
     {
         if (other == null)
@@ -47,6 +60,12 @@ public class IOFace : MonoBehaviour
         return false;
     }
 
+
+    /// <summary>
+    /// Connects, if possible, the argument face to the current one
+    /// </summary>
+    /// <param name="other">The other face</param>
+    /// <returns>True: can connect, False: can't connect</returns>
     public bool Connect(IOFace other)
     {
         if (!CanConnectTo(other))
@@ -61,6 +80,9 @@ public class IOFace : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Disconnects The current face from the one it's connected to
+    /// </summary>
     public void Disconnect()
     {
         if (connectedFace != null)
@@ -70,6 +92,7 @@ public class IOFace : MonoBehaviour
         }
     }
 
+    
     private void OnDrawGizmos()
     {
         switch (faceType)
@@ -92,11 +115,7 @@ public class IOFace : MonoBehaviour
         if (connectedFace != null)
         {
             Gizmos.color = Color.green;
-
-            Gizmos.DrawLine(
-                transform.position,
-                connectedFace.transform.position
-            );
+            Gizmos.DrawLine(transform.position, connectedFace.transform.position);
         }
     }
 }

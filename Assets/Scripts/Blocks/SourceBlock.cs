@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+/// <summary>
+/// Implementation of the source block
+/// </summary>
 public class SourceBlock : IOBlock
 {
     [SerializeField]
@@ -8,6 +12,21 @@ public class SourceBlock : IOBlock
     [SerializeField]
     private ItemVisual generatedItemVisual;
 
+    [SerializeField]
+    private int unlockStage;
+
+    private bool isActive;
+    private bool isUnlocked;
+
+    [SerializeField]
+    private GameObject lockedModel;
+
+    [SerializeField]
+    private GameObject unlockedModel;
+
+    /// <summary>
+    /// Initializes the block by configuring all directional faces (front, back, left, right) to function as outputs.
+    /// </summary>
     private void Awake()
     {
         frontFace.faceType = FaceType.Output;
@@ -17,36 +36,89 @@ public class SourceBlock : IOBlock
         leftFace.faceType = FaceType.Output;
 
         rightFace.faceType = FaceType.Output;
+
+        Lock();
     }
 
+    /// <summary>
+    /// Binds the specified item data to the visual representation handler at the start of the game.
+    /// </summary>
     private void Start()
     {
-        generatedItemVisual.SetItem(
-            generatedItem
-        );
+        generatedItemVisual.SetItem(generatedItem);
     }
 
+    /// <summary>
+    /// Determines whether the source block can generate an item by checking if it is active and if at least one output face is empty.
+    /// </summary>
+    /// <returns>True if the block is active and has an available empty output face; otherwise, false.</returns>
     protected override bool CanProcess()
     {
+        if (!isActive)
+            return false;
+
         foreach (IOFace face in GetOutputFaces())
         {
             if (!face.HasItem)
-            {
                 return true;
-            }
         }
 
         return false;
     }
 
+    /// <summary>
+    /// Completes the production cycle by populating any unoccupied output faces with the generated item.
+    /// </summary>
     protected override void CompleteProcess()
     {
         foreach (IOFace face in GetOutputFaces())
         {
             if (!face.HasItem)
-            {
                 face.currentItem = generatedItem;
-            }
         }
     }
+
+    /// <summary>
+    /// Enables the source block, allowing it to start processing and generating items.
+    /// </summary>
+    public void Activate()
+    {
+        isActive = true;
+    }
+
+    /// <summary>
+    /// Disables the source block, halting any further processing and item generation.
+    /// </summary>
+    public void Deactivate()
+    {
+        isActive = false;
+    }
+
+    /// <summary>
+    /// Unlocks the source block, making it available for activation and item generation, while also updating the visual state to reflect its unlocked status.
+    /// </summary>
+    public void Unlock()
+    {
+        isUnlocked = true;
+
+        unlockedModel.SetActive(true);
+        lockedModel.SetActive(false);
+    }
+
+    /// <summary>
+    /// Locks the source block, preventing it from being activated or generating items, and updates the visual state to indicate its locked status.
+    /// </summary>
+    public void Lock()
+    {
+        isUnlocked = false;
+
+        unlockedModel.SetActive(false);
+        lockedModel.SetActive(true);
+        Deactivate();
+    }
+
+    /// <summary>
+    /// Gets the stage at which the source block becomes unlocked.
+    /// </summary>
+    public int UnlockStage => unlockStage;
 }

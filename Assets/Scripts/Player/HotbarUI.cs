@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+/// <summary>
+/// Manages the hotbar UI.
+/// </summary>
 public class HotbarUI : MonoBehaviour
 {
     [SerializeField]
@@ -18,29 +22,30 @@ public class HotbarUI : MonoBehaviour
         UpdateSelection();
     }
 
-    private void RefreshHotbar()
+    /// <summary>
+    /// Refreshes the hotbar UI to reflect the current state of the player's inventory. 
+    /// </summary>
+    public void RefreshHotbar()
     {
         for (int i = 0; i < slotUIs.Length; i++)
         {
-            ToolData item = inventory.GetItem(i);
+            HotbarSlot slot = inventory.GetItem(i);
 
-            if (item != null)
-            {
-                slotUIs[i].SetIcon(item.icon);
-            }
+            if (slot != null && slot.unlocked)
+                slotUIs[i].SetIcon(slot.icon);
             else
-            {
                 slotUIs[i].SetIcon(null);
-            }
         }
     }
 
+    /// <summary>
+    /// Updates the selection highlight on the hotbar to match the currently selected slot in the player's inventory.
+    /// </summary>
     private void UpdateSelection()
     {
         for (int i = 0; i < slotUIs.Length; i++)
         {
             bool isSelected = i == inventory.SelectedSlot;
-
             slotUIs[i].SetSelected(isSelected);
         }
     }

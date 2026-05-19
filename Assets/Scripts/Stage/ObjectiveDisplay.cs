@@ -1,25 +1,104 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ObjectiveDisplay : MonoBehaviour
 {
-    [SerializeField]
-    private Transform goalsParent;
 
     [SerializeField]
-    private ItemGoalDisplay goalPrefab;
+    private TMP_Text stageTitleText;
 
     [SerializeField]
-    private Image recipeImage;
+    private TMP_Text timeText;
 
-    public void SetObjective(string text)
+    [SerializeField]
+    private Transform itemGoalList;
+
+    [SerializeField]
+    private ItemGoalUI goalPrefab;
+
+    private List<ItemGoalUI> goalUIs = new List<ItemGoalUI>();
+
+    [SerializeField]
+    private Image recipeDiagramImage;
+
+    public void ShowStage(Stage stage)
     {
-        objectiveText.text = text;
+        stageTitleText.text = stage.title;
+
+        SetTime(stage.timeLimit);
+
+        recipeDiagramImage.sprite = stage.recipeDiagram;
+
+        BuildGoals(stage);
     }
 
-    public void SetTimer(float timeLeft)
+    private void BuildGoals(Stage stage)
     {
-        timerText.text =
-            Mathf.CeilToInt(timeLeft).ToString();
+        ClearGoals();
+
+        foreach (ItemGoal goal in stage.goals)
+        {
+            ItemGoalUI goalUI =
+                Instantiate(
+                    goalPrefab,
+                    itemGoalList
+                );
+
+            goalUI.SetGoal(
+                goal.item,
+                0,
+                goal.requiredAmount
+            );
+
+            goalUIs.Add(goalUI);
+        }
+    }
+
+    public void UpdateGoal(
+        int index,
+        Item item,
+        int current,
+        int target)
+    {
+        if (index < 0 ||
+            index >= goalUIs.Count)
+        {
+            return;
+        }
+
+        goalUIs[index].SetGoal(
+            item,
+            current,
+            target
+        );
+    }
+
+    public void SetTime(float timeLeft)
+    {
+        int totalSeconds =
+            Mathf.CeilToInt(timeLeft);
+
+        int minutes =
+            totalSeconds / 60;
+
+        int seconds =
+            totalSeconds % 60;
+
+        timeText.text =
+            minutes.ToString() +
+            ":" +
+            seconds.ToString("00");
+    }
+
+    private void ClearGoals()
+    {
+        foreach (ItemGoalUI goalUI in goalUIs)
+        {
+            Destroy(goalUI.gameObject);
+        }
+
+        goalUIs.Clear();
     }
 }
