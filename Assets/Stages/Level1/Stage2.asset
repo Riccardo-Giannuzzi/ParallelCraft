@@ -19,4 +19,4 @@ MonoBehaviour:
     requiredAmount: 5
   - item: {fileID: 11400000, guid: 023b7ae6054c45e47a36b0877875f9d7, type: 2}
     requiredAmount: 2
-  recipeDiagram: {fileID: 21300000, guid: 65f2aacae36d71f41b97d38c242049ab, type: 3}
+  recipeDiagram: {fileID: 21300000, guid: 41ac3a7c12eb4c14ca07510b6f0155ae, type: 3}

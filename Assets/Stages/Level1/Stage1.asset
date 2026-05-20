@@ -17,4 +17,4 @@ MonoBehaviour:
   goals:
   - item: {fileID: 11400000, guid: d3affba465c69b647be1066d10d41a2d, type: 2}
     requiredAmount: 5
-  recipeDiagram: {fileID: 21300000, guid: 252c13ed691962a4e8e4512a9fb092c2, type: 3}
+  recipeDiagram: {fileID: 21300000, guid: e5171f1f82007ee4484a18da6c33181e, type: 3}
