@@ -114,8 +114,9 @@ public class SourceBlock : IOBlock
     }
 
     /// <summary>
-    /// Return if the source block is active in the stage.
-    /// </summary>
+    /// Checks if the source block is active and available for item generation in the specified stage.
+    /// </summary> <param name="stageIndex">The index of the stage to check for activity.</param>
+    /// <returns>True if the block is active in the given stage; otherwise, false
     public bool IsActiveInStage(int stageIndex)
     {
         return activeStages.Contains(stageIndex);

@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Automatically hides the UI panel after a certain amount of time, with a smooth sliding animation.
+/// </summary>
 public class AutoHideUI : MonoBehaviour
 {
     [SerializeField]
@@ -20,29 +23,22 @@ public class AutoHideUI : MonoBehaviour
         StartCoroutine(HideRoutine());
     }
 
+    /// <summary>
+    ///  Coroutine that handles the timing and animation for hiding the UI panel. 
+    /// </summary>
     private IEnumerator HideRoutine()
     {
-        yield return new WaitForSeconds(
-            visibleTime
-        );
+        yield return new WaitForSeconds(visibleTime);
 
-        Vector2 start =
-            panel.anchoredPosition;
-
-        Vector2 end =
-            start + Vector2.down * moveDistance;
-
+        Vector2 start = panel.anchoredPosition;
+        Vector2 end = start + Vector2.down * moveDistance;
         float timer = 0f;
 
         while (timer < animationTime)
         {
             timer += Time.deltaTime;
-
-            float t =
-                timer / animationTime;
-
-            panel.anchoredPosition =
-                Vector2.Lerp(start, end, t);
+            float t = timer / animationTime;
+            panel.anchoredPosition = Vector2.Lerp(start, end, t);
 
             yield return null;
         }
