@@ -125,8 +125,10 @@ public class StageManager : MonoBehaviour
     {
         foreach (SourceBlock source in sourceBlocks)
         {
-            if (source.UnlockStage <= currentStageIndex)
+            if (source.IsActiveInStage(currentStageIndex))
+            {
                 source.Activate();
+            }
         }
     }
 
@@ -137,10 +139,14 @@ public class StageManager : MonoBehaviour
     {
         foreach (SourceBlock source in sourceBlocks)
         {
-            if (source.UnlockStage <= currentStageIndex)
+            if (source.IsActiveInStage(currentStageIndex))
+            {
                 source.Unlock();
+            }
             else
+            {
                 source.Lock();
+            }
         }
     }
 

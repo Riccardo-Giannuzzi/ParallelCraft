@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -13,7 +14,7 @@ public class SourceBlock : IOBlock
     private ItemVisual generatedItemVisual;
 
     [SerializeField]
-    private int unlockStage;
+    private List<int> activeStages = new List<int>();
 
     private bool isActive;
 
@@ -113,7 +114,10 @@ public class SourceBlock : IOBlock
     }
 
     /// <summary>
-    /// Gets the stage at which the source block becomes unlocked.
+    /// Return if the source block is active in the stage.
     /// </summary>
-    public int UnlockStage => unlockStage;
+    public bool IsActiveInStage(int stageIndex)
+    {
+        return activeStages.Contains(stageIndex);
+    }
 }

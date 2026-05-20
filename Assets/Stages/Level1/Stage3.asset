@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a909593e1250d49b06f4be36ea0342, type: 3}
   m_Name: Stage3
   m_EditorClassIdentifier: 
-  title: Stage - 2
-  timeLimit: 70
+  title: Stage - 3
+  timeLimit: 80
   goals:
   - item: {fileID: 11400000, guid: d207cc370e195314fa9ee6fa69988d92, type: 2}
     requiredAmount: 5

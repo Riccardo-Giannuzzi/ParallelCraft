@@ -9,12 +9,19 @@ public class ItemVisual : MonoBehaviour
     [SerializeField]
     private SpriteRenderer spriteRenderer;
 
+    private Item currentItem;
+
     /// <summary>
     /// Updates the visual display to match the specified item data, enabling the renderer and applying its icon.
     /// </summary>
     /// <param name="item">The item data containing the icon sprite to display. Passing null clears the visual.</param>
     public void SetItem(Item item)
     {
+        if (currentItem == item)
+            return;
+
+        currentItem = item;
+
         if (item == null)
         {
             Clear();

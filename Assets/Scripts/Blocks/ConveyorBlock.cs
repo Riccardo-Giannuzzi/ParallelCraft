@@ -37,6 +37,15 @@ public class ConveyorBlock : IOBlock
     private Transform frontPosition;
 
     [SerializeField]
+    private Transform backPosition;
+
+    [SerializeField]
+    private Transform leftPosition;
+
+    [SerializeField]
+    private Transform rightPosition;
+
+    [SerializeField]
     private Transform centerPosition;
 
     /// <summary>
@@ -242,14 +251,33 @@ public class ConveyorBlock : IOBlock
 
         StopAllCoroutines();
 
+        isProcessing = false;
         isPushing = false;
 
+        processTimer = 0f;
+        pushTimer = 0f;
+
+        processingFace = null;
+
         centerItem.Clear();
-
         backItem.Clear();
-
         leftItem.Clear();
-
         rightItem.Clear();
+
+        ResetVisualPositions();
+    }
+
+    /// <summary>
+    /// Resets the starting position of the animations.
+    /// </summary>
+    private void ResetVisualPositions()
+    {
+        backItem.transform.position = backPosition.position;
+
+        leftItem.transform.position = leftPosition.position;
+
+        rightItem.transform.position = rightPosition.position;
+
+        centerItem.transform.position = centerPosition.position;
     }
 }
