@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Stage3
   m_EditorClassIdentifier: 
   title: Stage - 3
-  timeLimit: 80
+  timeLimit: 75
   goals:
   - item: {fileID: 11400000, guid: d207cc370e195314fa9ee6fa69988d92, type: 2}
     requiredAmount: 5
-  recipeDiagram: {fileID: 21300000, guid: 252c13ed691962a4e8e4512a9fb092c2, type: 3}
+  recipeDiagram: {fileID: 21300000, guid: 9bf2cc2ecfd413242bb0d21e08318eb7, type: 3}

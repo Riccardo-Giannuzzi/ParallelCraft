@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum StagePhase
 {
@@ -211,6 +212,7 @@ public class StageManager : MonoBehaviour
     private void LevelCompleted()
     {
         phase = StagePhase.Completed;
+        SceneManager.LoadScene("Menu");
     }
 
     /// <summary>
