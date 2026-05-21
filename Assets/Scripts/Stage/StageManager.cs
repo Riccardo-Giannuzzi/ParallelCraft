@@ -45,6 +45,8 @@ public class StageManager : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         InitializeSources();
         LoadStage(0);
     }
@@ -212,6 +214,8 @@ public class StageManager : MonoBehaviour
     private void LevelCompleted()
     {
         phase = StagePhase.Completed;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("Menu");
     }
 
